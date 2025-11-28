@@ -2,7 +2,6 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 
 import puppeteer from 'puppeteer'
 import fs from 'fs'
-import path from 'path'
 import dotenv from 'dotenv'
 import fetch from 'node-fetch'
 import { createRequire } from 'module'
@@ -64,6 +63,7 @@ async function runAudit(targetUrl) {
   await page.goto(targetUrl, { waitUntil: 'networkidle0' })
   await page.addScriptTag({ path: require.resolve('axe-core') })
 
+  /* global axe */
   const axeReport = await page.evaluate(async () => await axe.run())
   await browser.close()
 
@@ -123,7 +123,10 @@ async function runAudit(targetUrl) {
   const html = markdownToHtml(finalMarkdown).replace(/\[object Object\]/gi, '')
   const template = fs.readFileSync('./templates/report.html', 'utf8')
 
-  const finalHTML = template.replace('{{TOC}}', generateTOC(html)).replace('{{REPORT_HTML}}', html)
+  const finalHTML = template
+    .replace('{{TOC}}', generateTOC(html))
+    .replace('{{INTRO}}', '')
+    .replace('{{REPORT_HTML}}', html)
 
   fs.writeFileSync('wcag-report.html', finalHTML)
 

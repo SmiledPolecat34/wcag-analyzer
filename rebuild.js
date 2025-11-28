@@ -1,5 +1,4 @@
 import fs from 'fs'
-import path from 'path'
 import puppeteer from 'puppeteer'
 import { markdownToHtml } from './utils/mdToHtml.js'
 import { generateTOC } from './utils/generateToc.js'
