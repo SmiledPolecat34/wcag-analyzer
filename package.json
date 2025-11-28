@@ -2,8 +2,16 @@
   "name": "wcag-analyzer",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .js,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.ts,.tsx --fix",
+    "format": "prettier --write .",
+    "audit": "node index.js",
+    "clean": "node postClean.js",
+    "rebuild": "node rebuild.js",
+    "fulljs": "node full.js"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +21,15 @@
     "axe-core": "^4.11.0",
     "dotenv": "^17.2.3",
     "groq-sdk": "^0.37.0",
+    "marked": "^17.0.1",
     "puppeteer": "^24.31.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "@typescript-eslint/parser": "^8.48.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.7.1"
   }
 }

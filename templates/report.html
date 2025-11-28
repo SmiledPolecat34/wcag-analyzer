@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rapport WCAG – FRANKLIN VERSAYO</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Inter', Arial, sans-serif;
+        background: #ffffff;
+        color: #222;
+        line-height: 1.6;
+      }
+
+      /* HEADER */
+      header {
+        padding: 40px 60px;
+        border-bottom: 4px solid #8c0000;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 34px;
+        font-weight: 700;
+        color: #111;
+      }
+
+      .author {
+        margin-top: 8px;
+        font-size: 15px;
+        color: #555;
+      }
+
+      /* SOMMAIRE */
+      .toc-container {
+        padding: 30px 60px;
+        background: #f7f7f7;
+        border-bottom: 2px solid #ddd;
+      }
+
+      .toc-container h2 {
+        margin: 0 0 15px;
+        font-size: 22px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .toc-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .toc-item {
+        margin: 5px 0;
+      }
+
+      .toc-item.level-2 a {
+        font-weight: 600;
+      }
+
+      .toc-item.level-3 {
+        margin-left: 20px;
+      }
+
+      .toc-item a {
+        color: #8c0000;
+        text-decoration: none;
+      }
+
+      .toc-item a:hover {
+        text-decoration: underline;
+      }
+
+      /* CONTENU */
+      .content {
+        padding: 50px 60px;
+      }
+
+      h2 {
+        margin-top: 50px;
+        padding-bottom: 6px;
+        border-bottom: 3px solid #8c0000;
+        font-size: 26px;
+        font-weight: 700;
+      }
+
+      h3 {
+        margin-top: 30px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      pre {
+        background: #f0f0f0;
+        padding: 15px;
+        border-radius: 6px;
+        border-left: 4px solid #8c0000;
+        overflow-x: auto;
+      }
+
+      code {
+        font-family: Consolas, monospace;
+      }
+
+      .violation-block {
+        background: #fafafa;
+        border: 1px solid #ddd;
+        padding: 18px;
+        margin-top: 30px;
+        border-left: 5px solid #8c0000;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Audit d’Accessibilité Web<br />WCAG 2.1 Niveau AA</h1>
+      <div class="author">FRANKLIN VERSAYO</div>
+    </header>
+
+    <div class="toc-container">
+      <h2>Sommaire</h2>
+      {{TOC}}
+    </div>
+
+    <div class="content">{{REPORT_HTML}}</div>
+  </body>
+</html>

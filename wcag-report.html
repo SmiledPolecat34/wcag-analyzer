@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rapport WCAG – FRANKLIN VERSAYO</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Inter', Arial, sans-serif;
+        background: #ffffff;
+        color: #222;
+        line-height: 1.6;
+      }
+
+      /* HEADER */
+      header {
+        padding: 40px 60px;
+        border-bottom: 4px solid #8c0000;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 34px;
+        font-weight: 700;
+        color: #111;
+      }
+
+      .author {
+        margin-top: 8px;
+        font-size: 15px;
+        color: #555;
+      }
+
+      /* SOMMAIRE */
+      .toc-container {
+        padding: 30px 60px;
+        background: #f7f7f7;
+        border-bottom: 2px solid #ddd;
+      }
+
+      .toc-container h2 {
+        margin: 0 0 15px;
+        font-size: 22px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .toc-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .toc-item {
+        margin: 5px 0;
+      }
+
+      .toc-item.level-2 a {
+        font-weight: 600;
+      }
+
+      .toc-item.level-3 {
+        margin-left: 20px;
+      }
+
+      .toc-item a {
+        color: #8c0000;
+        text-decoration: none;
+      }
+
+      .toc-item a:hover {
+        text-decoration: underline;
+      }
+
+      /* CONTENU */
+      .content {
+        padding: 50px 60px;
+      }
+
+      h2 {
+        margin-top: 50px;
+        padding-bottom: 6px;
+        border-bottom: 3px solid #8c0000;
+        font-size: 26px;
+        font-weight: 700;
+      }
+
+      h3 {
+        margin-top: 30px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      pre {
+        background: #f0f0f0;
+        padding: 15px;
+        border-radius: 6px;
+        border-left: 4px solid #8c0000;
+        overflow-x: auto;
+      }
+
+      code {
+        font-family: Consolas, monospace;
+      }
+
+      .violation-block {
+        background: #fafafa;
+        border: 1px solid #ddd;
+        padding: 18px;
+        margin-top: 30px;
+        border-left: 5px solid #8c0000;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Audit d’Accessibilité Web<br />WCAG 2.1 Niveau AA</h1>
+      <div class="author">FRANKLIN VERSAYO</div>
+    </header>
+
+    <div class="toc-container">
+      <h2>Sommaire</h2>
+      <p>Aucun titre détecté.</p>
+    </div>
+
+    <div class="content"><p><strong></strong></p>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;div class=&quot;aspect-square&quot; tabindex=&quot;-1&quot;&gt;
+  &lt;div class=&quot;mx-1 will-change-transform&quot;&gt;
+    &lt;div class=&quot;bottom-3.5 right-3.5 left-3.5&quot;&gt;
+      &lt;div class=&quot;items-end gap-3 justify-between&quot;&gt;
+        &lt;div class=&quot;self-end flex-shrink-0&quot;&gt;
+          &lt;!-- Désactiver le focus pour l&#39;élément c-icon-button --&gt;
+          &lt;c-icon-button tabindex=&quot;-1&quot; aria-hidden=&quot;true&quot;&gt;&lt;/c-icon-button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p></p>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;c-button prependicon=&quot;search&quot; role=&quot;button&quot; aria-label=&quot;Rechercher&quot;&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p></p>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;button class=&quot;max-w-3 c-button--size-m c-button--variation-primary&quot; aria-label=&quot;Valider la commande&quot;&gt;&gt;&lt;/button&gt;
+</code></pre>
+<p></p>
+<pre><code class="language-html">&lt;button class=&quot;max-w-3 c-button--size-m c-button--variation-primary&quot;&gt;Valider la commande&lt;/button&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p></p>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<ol>
+<li><p></p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><p></p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><p></p>
+<ul>
+<li></li>
+</ul>
+</li>
+</ol>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;!-- Exemple 1 : Ajustement pour .border-[\#00b5e2] --&gt;
+&lt;span class=&quot;border-[#00b5e2]&quot; style=&quot;color: #333;&quot;&gt;Texte avec un meilleur contraste&lt;/span&gt;
+
+&lt;!-- Exemple 2 : Ajustement pour app-edito-push:nth-child(6) &gt; .p-[10px].sm\:p-[30px]... --&gt;
+&lt;span class=&quot;leading-normal.text-base.font-bold&quot; style=&quot;color: #333;&quot;&gt;Texte avec un meilleur contraste&lt;/span&gt;
+
+&lt;!-- Exemple 3 : Ajustement pour app-edito-push:nth-child(6) &gt; .p-[10px].sm\:p-[30px]... --&gt;
+&lt;p class=&quot;leading-none.text-xs&quot; style=&quot;color: #333;&quot;&gt;Texte avec un meilleur contraste&lt;/p&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<p></p>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;!-- Exemple d&#39;image avec alt --&gt;
+&lt;img src=&quot;image.jpg&quot; alt=&quot;Description de l&#39;image&quot;&gt;
+
+&lt;!-- Pour une image décorative --&gt;
+&lt;img src=&quot;deco-image.png&quot; role=&quot;presentation&quot;&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;!-- Exemple d&#39;image avec alt --&gt;
+&lt;img src=&quot;image.jpg&quot; alt=&quot;Description de l&#39;image&quot;&gt;
+
+&lt;!-- Pour une image décorative --&gt;
+&lt;img src=&quot;deco-image.png&quot; role=&quot;presentation&quot;&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;div class=&quot;relative items-center flex&quot;&gt;
+  &lt;input type=&quot;number&quot; min=&quot;0&quot; max=&quot;1&quot; step=&quot;0.05&quot; aria-label=&quot;Entrez la quantité souhaitée&quot;&gt;
+&lt;/div&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p></p>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;h1&gt;Titre Principal de la Page&lt;/h1&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p></p>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;main&gt;
+  &lt;app-text&gt;&lt;/app-text&gt;
+&lt;/main&gt;
+
+&lt;article role=&quot;region&quot;&gt;
+  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
+&lt;/article&gt;
+
+&lt;footer&gt;
+  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
+&lt;/footer&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;img src=&quot;image.jpg&quot; alt=&quot;&quot;&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;img src=&quot;image.jpg&quot; alt=&quot;Description de l&#39;image&quot;&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;button class=&quot;stretched-link&quot; target=&quot;_parent&quot; aria-label=&quot;Voir l&#39;offre&quot;&gt;&lt;/button&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;button class=&quot;stretched-link&quot; target=&quot;_parent&quot;&gt;Voir l&#39;offre&lt;/button&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;div class=&quot;section&quot;&gt;
+  &lt;!-- Contenu --&gt;
+&lt;/div&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;div class=&quot;section&quot;&gt;
+  &lt;h2&gt;Titre de la section&lt;/h2&gt;
+  &lt;!-- Contenu --&gt;
+&lt;/div&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;a href=&quot;lien.html&quot; class=&quot;stretched-link&quot;&gt;Voir l&#39;offre&lt;/a&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;a href=&quot;lien.html&quot; class=&quot;stretched-link&quot;&gt;Voir l&#39;offre&lt;/a&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;main&gt;
+  &lt;app-text&gt;&lt;/app-text&gt;
+&lt;/main&gt;
+
+&lt;article role=&quot;region&quot;&gt;
+  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
+&lt;/article&gt;
+
+&lt;footer&gt;
+  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
+&lt;/footer&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;main&gt;
+  &lt;app-text&gt;&lt;/app-text&gt;
+&lt;/main&gt;
+
+&lt;article role=&quot;region&quot;&gt;
+  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
+&lt;/article&gt;
+
+&lt;footer&gt;
+  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
+&lt;/footer&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;main&gt;
+  &lt;app-text&gt;&lt;/app-text&gt;
+&lt;/main&gt;
+
+&lt;article role=&quot;region&quot;&gt;
+  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
+&lt;/article&gt;
+
+&lt;footer&gt;
+  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
+&lt;/footer&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;main&gt;
+  &lt;app-text&gt;&lt;/app-text&gt;
+&lt;/main&gt;
+
+&lt;article role=&quot;region&quot;&gt;
+  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
+&lt;/article&gt;
+
+&lt;footer&gt;
+  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
+&lt;/footer&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;main&gt;
+  &lt;app-text&gt;&lt;/app-text&gt;
+&lt;/main&gt;
+
+&lt;article role=&quot;region&quot;&gt;
+  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
+&lt;/article&gt;
+
+&lt;footer&gt;
+  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
+&lt;/footer&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;main&gt;
+  &lt;app-text&gt;&lt;/app-text&gt;
+&lt;/main&gt;
+
+&lt;article role=&quot;region&quot;&gt;
+  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
+&lt;/article&gt;
+
+&lt;footer&gt;
+  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
+&lt;/footer&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;main&gt;
+  &lt;app-text&gt;&lt;/app-text&gt;
+&lt;/main&gt;
+
+&lt;article role=&quot;region&quot;&gt;
+  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
+&lt;/article&gt;
+
+&lt;footer&gt;
+  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
+&lt;/footer&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;main&gt;
+  &lt;app-text&gt;&lt;/app-text&gt;
+&lt;/main&gt;
+
+&lt;article role=&quot;region&quot;&gt;
+  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
+&lt;/article&gt;
+
+&lt;footer&gt;
+  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
+&lt;/footer&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;main&gt;
+  &lt;app-text&gt;&lt;/app-text&gt;
+&lt;/main&gt;
+
+&lt;article role=&quot;region&quot;&gt;
+  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
+&lt;/article&gt;
+
+&lt;footer&gt;
+  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
+&lt;/footer&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+<hr>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<p><strong></strong></p>
+<p></p>
+<pre><code class="language-html">&lt;div class=&quot;sm\:flex-row&quot; tabindex=&quot;0&quot;&gt;
+  &lt;div&gt;
+    &lt;!-- Contenu scrolable --&gt;
+    &lt;button&gt;Scroll&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p><strong></strong></p>
+<p></p>
+</div>
+  </body>
+</html>
