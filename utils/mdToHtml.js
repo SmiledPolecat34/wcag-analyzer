@@ -14,7 +14,7 @@ export function markdownToHtml(md) {
   const renderer = new marked.Renderer()
 
   // Neutralisation complète des titres
-  renderer.heading = function (text, level) {
+  renderer.heading = function (text) {
     const safe = typeof text === 'string' ? text.replace(/\[object Object\]/gi, '') : ''
 
     return `<p><strong>${safe}</strong></p>\n`

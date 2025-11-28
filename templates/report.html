@@ -92,6 +92,12 @@
         font-weight: 600;
       }
 
+      h4 {
+        margin: 20px 0 10px;
+        font-size: 17px;
+        font-weight: 600;
+      }
+
       pre {
         background: #f0f0f0;
         padding: 15px;
@@ -104,6 +110,23 @@
         font-family: Consolas, monospace;
       }
 
+      .panel {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 20px 24px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 28px;
+      }
+
+      .panel ul {
+        margin: 10px 0 0;
+      }
+
+      .impacts li {
+        margin: 4px 0;
+      }
+
       .violation-block {
         background: #fafafa;
         border: 1px solid #ddd;
@@ -111,6 +134,32 @@
         margin-top: 30px;
         border-left: 5px solid #8c0000;
         border-radius: 4px;
+      }
+
+      .nodes-wrapper {
+        margin-top: 12px;
+      }
+
+      .node-block {
+        background: #fff;
+        border: 1px solid #e1e1e1;
+        border-radius: 6px;
+        padding: 12px;
+        margin: 12px 0;
+      }
+
+      .node-title {
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .failure {
+        margin-top: 8px;
+        color: #8c0000;
+      }
+
+      .impact {
+        margin: 6px 0;
       }
     </style>
   </head>
@@ -126,6 +175,6 @@
       {{TOC}}
     </div>
 
-    <div class="content">{{REPORT_HTML}}</div>
+    <div class="content">{{INTRO}}{{REPORT_HTML}}</div>
   </body>
 </html>
