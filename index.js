@@ -15,9 +15,6 @@ import { flattenViolation } from './utils/flatten.js'
 dotenv.config()
 const require = createRequire(import.meta.url)
 
-/* ============================================================================
-   IA locale : Qwen2.5 14B
-   ============================================================================ */
 async function localLLM(prompt) {
   const res = await fetch('http://localhost:11434/api/generate', {
     method: 'POST',
@@ -26,23 +23,14 @@ async function localLLM(prompt) {
       model: 'qwen2.5:14b-instruct',
       prompt,
       stream: false,
-      options: {
-        num_predict: 4096,
-        temperature: 0.15,
-        top_p: 0.9,
-      },
+      options: { num_predict: 4096, temperature: 0.15, top_p: 0.9 },
     }),
   })
-
   if (!res.ok) throw new Error('Erreur Ollama : ' + res.statusText)
-
   const data = await res.json()
   return data.response
 }
 
-/* ============================================================================
-   URL
-   ============================================================================ */
 let url = process.argv[2]
 if (!url || url.startsWith('%') || url.trim() === '') url = process.env.WCAG_URL
 if (!url) {
@@ -52,15 +40,23 @@ if (!url) {
 
 console.log('🔍 Analyse de :', url)
 
-/* ============================================================================
-   FONCTION PRINCIPALE
-   ============================================================================ */
 async function runAudit(targetUrl) {
   console.log('🕵️ Scan Axe-Core…')
 
   const browser = await puppeteer.launch(PUPPETEER_OPTIONS)
   const page = await browser.newPage()
-  await page.goto(targetUrl, { waitUntil: 'networkidle0' })
+
+  // --- CORRECTION DU TIMEOUT ICI ---
+  // On augmente le timeout à 90s (90000ms) et on utilise networkidle2 (plus tolérant)
+  try {
+    await page.goto(targetUrl, { 
+      waitUntil: 'networkidle2', 
+      timeout: 90000 
+    })
+  } catch (error) {
+    console.warn('⚠️ Timeout ou erreur de navigation, tentative de continuation...', error.message)
+  }
+
   await page.addScriptTag({ path: require.resolve('axe-core') })
 
   /* global axe */
@@ -68,75 +64,88 @@ async function runAudit(targetUrl) {
   await browser.close()
 
   if (!axeReport.violations.length) {
-    fs.writeFileSync('wcag-report.md', '# Rapport WCAG\n\nAucune violation détectée.')
-    return console.log('🔵 Aucun problème détecté.')
+    console.log('🔵 Aucun problème détecté.')
+    return
   }
 
   console.log('📊 Violations trouvées :', axeReport.violations.length)
 
-  /* ============================================================================
-     FLATTEN : on ne split PAS ici → chunk complet
-     ============================================================================ */
-  // === 1) Flatten des violations ===
-  const flatTexts = axeReport.violations.map(flattenViolation)
+  // Boucle de traitement IA
+  let finalMarkdown = ''
+  
+  for (let i = 0; i < axeReport.violations.length; i++) {
+    const violation = axeReport.violations[i]
+    console.log(`🧠 Traitement ${i + 1}/${axeReport.violations.length} : [${violation.impact}] ${violation.id}`)
 
-  // === 2) Empêcher les strings vides (CRITIQUE) ===
-  const cleaned = flatTexts.map((t) => (t || '').trim()).filter(Boolean)
-
-  if (!cleaned.length) {
-    console.error('❌ Aucune donnée valide après flatten. Vérifie flattenViolation().')
-    process.exit(1)
-  }
-
-  /* ============================================================================
-     IA
-     ============================================================================ */
-  // On traite 1 violation = 1 chunk
-  const violations = axeReport.violations
-    .map(flattenViolation)
-    .map((v) => v.trim())
-    .filter(Boolean)
-
-  console.log('📦 Violations individuelles :', violations.length)
-
-  let finalMarkdown = '# Rapport WCAG\n\n'
-
-  for (let i = 0; i < violations.length; i++) {
-    console.log(`🧠 Traitement violation ${i + 1}/${violations.length}`)
-
-    const prompt = buildPrompt(violations[i])
+    const textPrompt = flattenViolation(violation)
+    const prompt = buildPrompt(textPrompt)
 
     try {
-      const md = await localLLM(prompt)
+      const mdResponse = await localLLM(prompt)
+      
+      // Injection de la carte avec code couleur
+      finalMarkdown += `
+<div class="violation-card impact-${violation.impact || 'minor'}">
 
-      finalMarkdown += `\n\n${md}\n`
-    } catch {
-      finalMarkdown += `\n\n(Erreur IA)\n`
+${mdResponse}
+
+</div>
+`
+    } catch (e) {
+      console.error('Erreur IA:', e)
+      finalMarkdown += `\n\n> Erreur de génération pour ${violation.id}\n`
     }
   }
 
-  /* ============================================================================
-     EXPORTS
-     ============================================================================ */
-  fs.writeFileSync('wcag-report.md', finalMarkdown)
+  // --- GÉNÉRATION EXPORTS ---
 
-  const html = markdownToHtml(finalMarkdown).replace(/\[object Object\]/gi, '')
+  // HTML
+  const htmlContent = markdownToHtml(finalMarkdown)
   const template = fs.readFileSync('./templates/report.html', 'utf8')
 
   const finalHTML = template
-    .replace('{{TOC}}', generateTOC(html))
-    .replace('{{INTRO}}', '')
-    .replace('{{REPORT_HTML}}', html)
+    .replace('{{TOC}}', generateTOC(htmlContent))
+    .replace('{{REPORT_HTML}}', htmlContent)
 
   fs.writeFileSync('wcag-report.html', finalHTML)
+  console.log('📄 HTML généré.')
 
+  // PDF
   const browserPDF = await puppeteer.launch({ headless: 'new' })
   const pagePDF = await browserPDF.newPage()
-  await pagePDF.setContent(finalHTML)
-  await pagePDF.pdf({ path: 'wcag-report.pdf', format: 'A4', printBackground: true })
+  await pagePDF.setContent(finalHTML, { waitUntil: 'networkidle0' })
+  
+  await pagePDF.pdf({
+    path: 'wcag-report.pdf',
+    format: 'A4',
+    printBackground: true,
+    displayHeaderFooter: true,
+    scale: 0.9, 
+    margin: { top: '20mm', bottom: '20mm', left: '10mm', right: '10mm' },
+    footerTemplate: `<div style="font-size:9px;color:#bbb;width:100%;text-align:center;font-family:Arial;padding-top:10px;">Page <span class="pageNumber"></span> / <span class="totalPages"></span></div>`,
+    headerTemplate: '<div></div>'
+  })
   await browserPDF.close()
+  console.log('📕 PDF généré avec pagination.')
 
-  console.log('📕 PDF généré : wcag-report.pdf')
+  // PROMPT GEMINI
+  const geminiContext = `
+# Rôle
+Expert Développeur Front-End (Accessibilité WCAG 2.1 AA).
+
+# Mission
+Voici un rapport d'audit. Pour chaque violation :
+1. Identifie l'élément.
+2. Donne le code CORRIGÉ (HTML/CSS/JS) prêt à l'emploi.
+3. Explique la correction.
+
+--- RAPPORT ---
+${finalMarkdown}
+--- FIN ---
+`.trim()
+
+  fs.writeFileSync('gemini-fix-prompt.md', geminiContext)
+  console.log('✨ Prompt Gemini généré.')
 }
 
 runAudit(url)

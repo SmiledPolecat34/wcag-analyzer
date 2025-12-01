@@ -2,172 +2,135 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>Rapport WCAG – FRANKLIN VERSAYO</title>
-
+    <title>Rapport WCAG</title>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
       body {
         margin: 0;
-        font-family: 'Inter', Arial, sans-serif;
-        background: #ffffff;
-        color: #222;
-        line-height: 1.6;
+        font-family: 'Inter', sans-serif;
+        color: #1f2937;
+        line-height: 1.5;
+        font-size: 12px;
       }
 
-      /* HEADER */
+      /* --- HEADER --- */
       header {
-        padding: 40px 60px;
-        border-bottom: 4px solid #8c0000;
+        padding: 30px 40px;
+        background: #f3f4f6;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 30px;
       }
-
       h1 {
         margin: 0;
-        font-size: 34px;
-        font-weight: 700;
+        font-size: 24px;
         color: #111;
       }
-
-      .author {
-        margin-top: 8px;
-        font-size: 15px;
-        color: #555;
+      .meta {
+        color: #6b7280;
+        font-size: 12px;
+        margin-top: 5px;
       }
 
-      /* SOMMAIRE */
+      /* --- SOMMAIRE --- */
       .toc-container {
-        padding: 30px 60px;
-        background: #f7f7f7;
-        border-bottom: 2px solid #ddd;
+        padding: 0 40px 30px;
+        border-bottom: 1px solid #e5e7eb;
+        page-break-after: always;
       }
-
-      .toc-container h2 {
-        margin: 0 0 15px;
-        font-size: 22px;
-        font-weight: 600;
-        color: #333;
-      }
-
-      .toc-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      .toc-item {
-        margin: 5px 0;
-      }
-
-      .toc-item.level-2 a {
-        font-weight: 600;
-      }
-
-      .toc-item.level-3 {
-        margin-left: 20px;
-      }
-
       .toc-item a {
-        color: #8c0000;
+        color: #2563eb;
         text-decoration: none;
       }
-
-      .toc-item a:hover {
-        text-decoration: underline;
+      .toc-item.level-3 {
+        margin-left: 20px;
+        color: #666;
       }
 
-      /* CONTENU */
+      /* --- CONTENU --- */
       .content {
-        padding: 50px 60px;
+        padding: 40px;
+        max-width: 100%;
+        box-sizing: border-box;
       }
 
-      h2 {
-        margin-top: 50px;
-        padding-bottom: 6px;
-        border-bottom: 3px solid #8c0000;
-        font-size: 26px;
+      /* --- CARTES DE VIOLATION --- */
+      .violation-card {
+        border: 1px solid #e5e7eb;
+        border-left-width: 6px;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: #fff;
+
+        /* Empêche la coupure au milieu d'une carte */
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .impact-critical {
+        border-left-color: #ef4444;
+        background-color: #fef2f2;
+      }
+      .impact-serious {
+        border-left-color: #f97316;
+        background-color: #fff7ed;
+      }
+      .impact-moderate {
+        border-left-color: #eab308;
+        background-color: #fefce8;
+      }
+      .impact-minor {
+        border-left-color: #3b82f6;
+        background-color: #eff6ff;
+      }
+
+      .violation-card h2 {
+        margin-top: 0;
+        font-size: 16px;
+        color: #111;
+      }
+      .violation-card h3 {
+        margin-top: 15px;
+        font-size: 11px;
+        text-transform: uppercase;
         font-weight: 700;
+        color: #4b5563;
+        letter-spacing: 0.5px;
       }
 
-      h3 {
-        margin-top: 30px;
-        font-size: 20px;
-        font-weight: 600;
-      }
-
-      h4 {
-        margin: 20px 0 10px;
-        font-size: 17px;
-        font-weight: 600;
-      }
-
+      /* --- CORRECTION DES COUPURES DE TEXTE --- */
       pre {
-        background: #f0f0f0;
-        padding: 15px;
+        background: #1e293b;
+        color: #e2e8f0;
+        padding: 10px;
         border-radius: 6px;
-        border-left: 4px solid #8c0000;
-        overflow-x: auto;
+        font-size: 11px;
+        font-family: Consolas, monospace;
+
+        /* FORCE LE RETOUR À LA LIGNE */
+        white-space: pre-wrap !important;
+        word-break: break-all !important;
+        overflow-wrap: break-word !important;
+        max-width: 100%;
+        overflow: hidden;
       }
 
       code {
         font-family: Consolas, monospace;
+        word-break: break-word;
       }
 
-      .panel {
-        background: #fff;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        padding: 20px 24px;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-        margin-bottom: 28px;
-      }
-
-      .panel ul {
-        margin: 10px 0 0;
-      }
-
-      .impacts li {
-        margin: 4px 0;
-      }
-
-      .violation-block {
-        background: #fafafa;
-        border: 1px solid #ddd;
-        padding: 18px;
-        margin-top: 30px;
-        border-left: 5px solid #8c0000;
-        border-radius: 4px;
-      }
-
-      .nodes-wrapper {
-        margin-top: 12px;
-      }
-
-      .node-block {
-        background: #fff;
-        border: 1px solid #e1e1e1;
-        border-radius: 6px;
-        padding: 12px;
-        margin: 12px 0;
-      }
-
-      .node-title {
-        font-weight: 600;
-        margin-bottom: 6px;
-      }
-
-      .failure {
-        margin-top: 8px;
-        color: #8c0000;
-      }
-
-      .impact {
-        margin: 6px 0;
+      img {
+        max-width: 100%;
+        height: auto;
       }
     </style>
   </head>
-
   <body>
     <header>
-      <h1>Audit d’Accessibilité Web<br />WCAG 2.1 Niveau AA</h1>
-      <div class="author">FRANKLIN VERSAYO</div>
+      <h1>Rapport d'Audit Accessibilité</h1>
+      <div class="meta">Généré automatiquement par WCAG Analyzer</div>
     </header>
 
     <div class="toc-container">
@@ -175,6 +138,6 @@
       {{TOC}}
     </div>
 
-    <div class="content">{{INTRO}}{{REPORT_HTML}}</div>
+    <div class="content">{{REPORT_HTML}}</div>
   </body>
 </html>

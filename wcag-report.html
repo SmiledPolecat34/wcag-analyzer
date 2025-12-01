@@ -2,123 +2,135 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>Rapport WCAG – FRANKLIN VERSAYO</title>
-
+    <title>Rapport WCAG</title>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
       body {
         margin: 0;
-        font-family: 'Inter', Arial, sans-serif;
-        background: #ffffff;
-        color: #222;
-        line-height: 1.6;
+        font-family: 'Inter', sans-serif;
+        color: #1f2937;
+        line-height: 1.5;
+        font-size: 12px;
       }
 
-      /* HEADER */
+      /* --- HEADER --- */
       header {
-        padding: 40px 60px;
-        border-bottom: 4px solid #8c0000;
+        padding: 30px 40px;
+        background: #f3f4f6;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 30px;
       }
-
       h1 {
         margin: 0;
-        font-size: 34px;
-        font-weight: 700;
+        font-size: 24px;
         color: #111;
       }
-
-      .author {
-        margin-top: 8px;
-        font-size: 15px;
-        color: #555;
+      .meta {
+        color: #6b7280;
+        font-size: 12px;
+        margin-top: 5px;
       }
 
-      /* SOMMAIRE */
+      /* --- SOMMAIRE --- */
       .toc-container {
-        padding: 30px 60px;
-        background: #f7f7f7;
-        border-bottom: 2px solid #ddd;
+        padding: 0 40px 30px;
+        border-bottom: 1px solid #e5e7eb;
+        page-break-after: always;
       }
-
-      .toc-container h2 {
-        margin: 0 0 15px;
-        font-size: 22px;
-        font-weight: 600;
-        color: #333;
-      }
-
-      .toc-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      .toc-item {
-        margin: 5px 0;
-      }
-
-      .toc-item.level-2 a {
-        font-weight: 600;
-      }
-
-      .toc-item.level-3 {
-        margin-left: 20px;
-      }
-
       .toc-item a {
-        color: #8c0000;
+        color: #2563eb;
         text-decoration: none;
       }
-
-      .toc-item a:hover {
-        text-decoration: underline;
+      .toc-item.level-3 {
+        margin-left: 20px;
+        color: #666;
       }
 
-      /* CONTENU */
+      /* --- CONTENU --- */
       .content {
-        padding: 50px 60px;
+        padding: 40px;
+        max-width: 100%;
+        box-sizing: border-box;
       }
 
-      h2 {
-        margin-top: 50px;
-        padding-bottom: 6px;
-        border-bottom: 3px solid #8c0000;
-        font-size: 26px;
+      /* --- CARTES DE VIOLATION --- */
+      .violation-card {
+        border: 1px solid #e5e7eb;
+        border-left-width: 6px;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: #fff;
+
+        /* Empêche la coupure au milieu d'une carte */
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .impact-critical {
+        border-left-color: #ef4444;
+        background-color: #fef2f2;
+      }
+      .impact-serious {
+        border-left-color: #f97316;
+        background-color: #fff7ed;
+      }
+      .impact-moderate {
+        border-left-color: #eab308;
+        background-color: #fefce8;
+      }
+      .impact-minor {
+        border-left-color: #3b82f6;
+        background-color: #eff6ff;
+      }
+
+      .violation-card h2 {
+        margin-top: 0;
+        font-size: 16px;
+        color: #111;
+      }
+      .violation-card h3 {
+        margin-top: 15px;
+        font-size: 11px;
+        text-transform: uppercase;
         font-weight: 700;
+        color: #4b5563;
+        letter-spacing: 0.5px;
       }
 
-      h3 {
-        margin-top: 30px;
-        font-size: 20px;
-        font-weight: 600;
-      }
-
+      /* --- CORRECTION DES COUPURES DE TEXTE --- */
       pre {
-        background: #f0f0f0;
-        padding: 15px;
+        background: #1e293b;
+        color: #e2e8f0;
+        padding: 10px;
         border-radius: 6px;
-        border-left: 4px solid #8c0000;
-        overflow-x: auto;
+        font-size: 11px;
+        font-family: Consolas, monospace;
+
+        /* FORCE LE RETOUR À LA LIGNE */
+        white-space: pre-wrap !important;
+        word-break: break-all !important;
+        overflow-wrap: break-word !important;
+        max-width: 100%;
+        overflow: hidden;
       }
 
       code {
         font-family: Consolas, monospace;
+        word-break: break-word;
       }
 
-      .violation-block {
-        background: #fafafa;
-        border: 1px solid #ddd;
-        padding: 18px;
-        margin-top: 30px;
-        border-left: 5px solid #8c0000;
-        border-radius: 4px;
+      img {
+        max-width: 100%;
+        height: auto;
       }
     </style>
   </head>
-
   <body>
     <header>
-      <h1>Audit d’Accessibilité Web<br />WCAG 2.1 Niveau AA</h1>
-      <div class="author">FRANKLIN VERSAYO</div>
+      <h1>Rapport d'Audit Accessibilité</h1>
+      <div class="meta">Généré automatiquement par WCAG Analyzer</div>
     </header>
 
     <div class="toc-container">
@@ -126,553 +138,648 @@
       <p>Aucun titre détecté.</p>
     </div>
 
-    <div class="content"><p><strong></strong></p>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
+    <div class="content"><div class="violation-card impact-serious">
+
+<h2>Éléments aria-hidden contenant des éléments focusables</h2>
+<h3>Résumé</h3>
+<p>Les utilisateurs qui naviguent avec le clavier ou les lecteurs d&#39;écran peuvent rencontrer des problèmes de navigation et de compréhension du contenu si des éléments <code>aria-hidden</code> contiennent des éléments focusables. Cela peut entraîner une confusion sur la structure du site, rendant l&#39;expérience utilisateur moins fluide et plus frustrante.</p>
+<h3>Problème</h3>
+<p>Les éléments avec le sélecteur CSS <code>.aspect-square:nth-child(2) &gt; .mx-1.will-change-transform &gt; .bottom-3\.5.right-3\.5.left-3\.5 &gt; .items-end.gap-3.justify-between &gt; .self-end.flex-shrink-0 &gt; c-icon-button</code> et <code>.aspect-square:nth-child(4) &gt; .mx-1.will-change-transform &gt; .bottom-3\.5.right-3\.5.left-3\.5 &gt; .items-end.gap-3.justify-between &gt; .self-end.flex-shrink-0 &gt; c-icon-button</code> sont marqués avec <code>aria-hidden=&quot;true&quot;</code> mais contiennent des éléments focusables. Cela va à l&#39;encontre du bon usage de l&#39;attribut <code>aria-hidden</code>.</p>
+<h3>Règle WCAG concernée</h3>
+<p>2.1 A - Navigateurs et lecteurs d&#39;écran doivent pouvoir être utilisés pour naviguer dans le contenu.</p>
+<h3>Cause technique</h3>
+<p>L&#39;utilisation incorrecte de l&#39;attribut <code>aria-hidden</code> entraîne une situation où des éléments qui ne devraient pas être accessibles via les méthodes de navigation standard (clavier, lecteur d&#39;écran) sont en fait accessibles. Cela peut perturber la structure du DOM pour les utilisateurs dépendants de ces technologies.</p>
+<h3>Correction proposée</h3>
+<p>Pour corriger cette situation, il faut soit supprimer l&#39;attribut <code>aria-hidden</code> si le contenu doit être accessible, soit désactiver ou masquer complètement les éléments focusables dans ce contexte. Voici un exemple de correction pour l&#39;un des éléments :</p>
 <pre><code class="language-html">&lt;div class=&quot;aspect-square&quot; tabindex=&quot;-1&quot;&gt;
   &lt;div class=&quot;mx-1 will-change-transform&quot;&gt;
-    &lt;div class=&quot;bottom-3.5 right-3.5 left-3.5&quot;&gt;
+    &lt;div class=&quot;bottom-3\.5 right-3\.5 left-3\.5&quot;&gt;
       &lt;div class=&quot;items-end gap-3 justify-between&quot;&gt;
         &lt;div class=&quot;self-end flex-shrink-0&quot;&gt;
-          &lt;!-- Désactiver le focus pour l&#39;élément c-icon-button --&gt;
-          &lt;c-icon-button tabindex=&quot;-1&quot; aria-hidden=&quot;true&quot;&gt;&lt;/c-icon-button&gt;
+          &lt;!-- Désactiver l&#39;élément focusable --&gt;
+          &lt;c-icon-button disabled&gt;&lt;/c-icon-button&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
-<p><strong></strong></p>
-<p></p>
+<h3>Recommandation</h3>
+<p>Assurez-vous que les éléments marqués avec <code>aria-hidden</code> ne contiennent pas de contenu qui peut être focusé. Si le contenu doit rester accessible, supprimez l&#39;attribut <code>aria-hidden</code>. Sinon, désactivez ou masquez complètement les éléments focusables pour éviter toute confusion.</p>
 <hr>
-<p></p>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;c-button prependicon=&quot;search&quot; role=&quot;button&quot; aria-label=&quot;Rechercher&quot;&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
-<hr>
-<p></p>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;button class=&quot;max-w-3 c-button--size-m c-button--variation-primary&quot; aria-label=&quot;Valider la commande&quot;&gt;&gt;&lt;/button&gt;
-</code></pre>
-<p></p>
-<pre><code class="language-html">&lt;button class=&quot;max-w-3 c-button--size-m c-button--variation-primary&quot;&gt;Valider la commande&lt;/button&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
-<hr>
-<p></p>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<ol>
-<li><p></p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li><p></p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li><p></p>
-<ul>
-<li></li>
-</ul>
-</li>
-</ol>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;!-- Exemple 1 : Ajustement pour .border-[\#00b5e2] --&gt;
-&lt;span class=&quot;border-[#00b5e2]&quot; style=&quot;color: #333;&quot;&gt;Texte avec un meilleur contraste&lt;/span&gt;
+<p>Ce rapport vous guide étape par étape dans la résolution des problèmes liés à l&#39;utilisation incorrecte de l&#39;attribut <code>aria-hidden</code>, en mettant l&#39;accent sur l&#39;amélioration de l&#39;expérience utilisateur et la conformité aux normes WCAG.</p>
+</div>
 
-&lt;!-- Exemple 2 : Ajustement pour app-edito-push:nth-child(6) &gt; .p-[10px].sm\:p-[30px]... --&gt;
-&lt;span class=&quot;leading-normal.text-base.font-bold&quot; style=&quot;color: #333;&quot;&gt;Texte avec un meilleur contraste&lt;/span&gt;
+<div class="violation-card impact-serious">
 
-&lt;!-- Exemple 3 : Ajustement pour app-edito-push:nth-child(6) &gt; .p-[10px].sm\:p-[30px]... --&gt;
-&lt;p class=&quot;leading-none.text-xs&quot; style=&quot;color: #333;&quot;&gt;Texte avec un meilleur contraste&lt;/p&gt;
+<h2>Utilisation incorrecte de l&#39;attribut aria-label sur un bouton</h2>
+<h3>Résumé</h3>
+<p>L&#39;utilisation de l&#39;attribut <code>aria-label</code> sans rôle approprié peut entraîner une mauvaise interprétation par les lecteurs d&#39;écran, rendant la navigation et la compréhension du contenu plus difficile pour les utilisateurs ayant des besoins en accessibilité.</p>
+<h3>Problème</h3>
+<p>Le bouton avec l&#39;attribut <code>prependicon=&quot;search&quot;</code> utilise incorrectement l&#39;attribut <code>aria-label</code> sans un rôle ARIA valide. Cela peut entraîner une mauvaise communication de la fonctionnalité du bouton aux utilisateurs qui dépendent des lecteurs d&#39;écran.</p>
+<h3>Règle WCAG concernée</h3>
+<p>2.5.3 – Label in Name (Sufficient)</p>
+<h3>Cause technique</h3>
+<p>L&#39;élément <code>c-button</code> utilise l&#39;attribut <code>aria-label</code>, mais ne définit pas de rôle ARIA approprié, ce qui est interdit par les spécifications ARIA.</p>
+<h3>Correction proposée</h3>
+<p>Pour corriger cette violation, il faut soit supprimer l&#39;attribut <code>aria-label</code> si le bouton a un texte visible et descriptif, soit ajouter un rôle ARIA valide à l&#39;élément. Si la fonctionnalité du bouton nécessite une description spécifique pour les utilisateurs de lecteur d&#39;écran, on peut utiliser <code>role=&quot;button&quot;</code>.</p>
+<pre><code class="language-html">&lt;!-- Bouton corrigé --&gt;
+&lt;button class=&quot;c-button&quot; prependicon=&quot;search&quot; role=&quot;button&quot;&gt;Rechercher&lt;/button&gt;
 </code></pre>
-<p><strong></strong></p>
-<p></p>
-<p></p>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;!-- Exemple d&#39;image avec alt --&gt;
-&lt;img src=&quot;image.jpg&quot; alt=&quot;Description de l&#39;image&quot;&gt;
+<h3>Recommandation</h3>
+<p>Ajoutez un rôle ARIA approprié à tout élément qui utilise l&#39;attribut <code>aria-label</code>. Assurez-vous que chaque élément a une structure et des attributs conformes aux spécifications ARIA pour garantir la meilleure expérience possible pour tous les utilisateurs.</p>
+</div>
 
-&lt;!-- Pour une image décorative --&gt;
-&lt;img src=&quot;deco-image.png&quot; role=&quot;presentation&quot;&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
-<hr>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;!-- Exemple d&#39;image avec alt --&gt;
-&lt;img src=&quot;image.jpg&quot; alt=&quot;Description de l&#39;image&quot;&gt;
+<div class="violation-card impact-critical">
 
-&lt;!-- Pour une image décorative --&gt;
-&lt;img src=&quot;deco-image.png&quot; role=&quot;presentation&quot;&gt;
+<h2>Bouton sans texte discernable</h2>
+<h3>Résumé</h3>
+<p>Un utilisateur qui navigue avec un lecteur d&#39;écran ne pourra pas comprendre la fonctionnalité du bouton. Cela peut entraîner une confusion ou une difficulté à interagir correctement avec l&#39;interface, rendant l&#39;expérience utilisateur moins fluide et plus frustrante.</p>
+<h3>Problème</h3>
+<p>Le bouton en question n&#39;a pas de texte visible pour les lecteurs d&#39;écran ni aucun attribut aria approprié (aria-label, aria-labelledby) qui permettrait aux utilisateurs ayant une déficience visuelle de comprendre sa fonctionnalité. Il est donc impossible pour ces utilisateurs de savoir ce que le bouton fait ou à quoi il sert.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.3.2 – Contraste (Minimum)</p>
+<p><strong>Note :</strong> La règle mentionnée dans l&#39;ID du problème est en réalité 1.1.1 – Non-text Content, mais la description indique qu&#39;il s&#39;agit d&#39;un bouton sans texte discernable, donc la règle appropriée ici serait plutôt 1.3.1 – Info et Relations.</p>
+<h3>Cause technique</h3>
+<p>Le bouton ciblé par l&#39;analyse ne possède pas de texte interne visible pour les lecteurs d&#39;écran, n&#39;a pas d&#39;attribut aria-label ou aria-labelledby correctement configuré, et ne fait référence à aucun élément avec un contenu textuel. De plus, il manque des attributs comme <code>title</code> qui peuvent aider à clarifier sa fonction.</p>
+<h3>Correction proposée</h3>
+<p>Pour corriger cette violation, vous pouvez ajouter du texte interne au bouton ou utiliser l&#39;attribut aria-label pour fournir une description claire de la fonctionnalité du bouton. Voici un exemple :</p>
+<pre><code class="language-html">&lt;button class=&quot;max-w-3 c-button--size-m c-button--variation-primary&quot; aria-label=&quot;Valider le formulaire&quot;&gt;Valider&lt;/button&gt;
 </code></pre>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;div class=&quot;relative items-center flex&quot;&gt;
-  &lt;input type=&quot;number&quot; min=&quot;0&quot; max=&quot;1&quot; step=&quot;0.05&quot; aria-label=&quot;Entrez la quantité souhaitée&quot;&gt;
-&lt;/div&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
+<h3>Recommandation</h3>
+<p>Ajoutez toujours du texte ou des attributs aria aux boutons pour que les utilisateurs ayant une déficience visuelle puissent comprendre leur fonction. Cela garantit une meilleure accessibilité et évite la confusion lors de l&#39;interaction avec le site.</p>
 <hr>
-<p></p>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;h1&gt;Titre Principal de la Page&lt;/h1&gt;
+<p>Ce rapport est conçu pour être clair, concis et facile à suivre, tout en offrant des informations précises sur chaque violation détectée.</p>
+</div>
+
+<div class="violation-card impact-serious">
+
+<h2>Contraste insuffisant entre les couleurs</h2>
+<h3>Résumé</h3>
+<p>Le contraste insuffisant entre le texte et la couleur d&#39;arrière-plan peut rendre l’information difficile à lire pour les utilisateurs ayant une déficience visuelle. Cela peut entraîner des difficultés de lecture, voire un malaise oculaire pour certains utilisateurs.</p>
+<h3>Problème</h3>
+<p>Plusieurs éléments du site web n&#39;atteignent pas le ratio de contraste minimal requis par WCAG 2.1 AA. Par exemple, l’élément avec la classe <code>.border-\[\#00b5e2\]</code> a un contraste insuffisant entre sa couleur de premier plan (#00b5e2) et son arrière-plan (blanc), ce qui rend le texte difficile à lire pour les utilisateurs ayant une déficience visuelle.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.4.3 – Contraste (minimaire)</p>
+<h3>Cause technique</h3>
+<p>Le contraste entre la couleur de premier plan (#00b5e2) et l&#39;arrière-plan blanc est insuffisant, avec un ratio de 2.41 contre le minimum requis de 4.5:1 pour les éléments de taille standard.</p>
+<h3>Correction proposée</h3>
+<p>Pour corriger ce problème, il faut ajuster la couleur du texte ou de l’arrière-plan afin d&#39;atteindre le ratio minimal de contraste WCAG 2.1 AA.</p>
+<pre><code class="language-html">&lt;!-- Exemple corrigé --&gt;
+&lt;p class=&quot;border-[#00b5e2]&quot; style=&quot;color: #003a46;&quot;&gt;Texte visible&lt;/p&gt;
 </code></pre>
-<p><strong></strong></p>
-<p></p>
+<h3>Recommandation</h3>
+<p>Utilisez un outil de vérification du contraste pour sélectionner des couleurs qui respectent les normes WCAG 2.1 AA et assurez-vous que tous les éléments textuels atteignent le ratio minimal requis.</p>
 <hr>
-<p></p>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;main&gt;
-  &lt;app-text&gt;&lt;/app-text&gt;
+<h2>Contraste insuffisant entre les couleurs</h2>
+<h3>Résumé</h3>
+<p>Le manque de contraste entre le texte et l&#39;arrière-plan peut rendre la lecture difficile pour les utilisateurs ayant une déficience visuelle. Cela peut entraîner des difficultés de navigation et d&#39;accès à l’information.</p>
+<h3>Problème</h3>
+<p>L&#39;élément avec la classe <code>app-edito-push:nth-child(6) &gt; .p-\[10px\]...</code> a un contraste insuffisant entre sa couleur de premier plan (#ffffff) et son arrière-plan (#00b1fd), ce qui rend le texte difficile à lire pour les utilisateurs ayant une déficience visuelle.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.4.3 – Contraste (minimaire)</p>
+<h3>Cause technique</h3>
+<p>Le contraste entre la couleur de premier plan (#ffffff) et l&#39;arrière-plan (#00b1fd) est insuffisant, avec un ratio de 2.41 contre le minimum requis de 4.5:1 pour les éléments de taille standard.</p>
+<h3>Correction proposée</h3>
+<p>Pour corriger ce problème, il faut ajuster la couleur du texte ou de l’arrière-plan afin d&#39;atteindre le ratio minimal de contraste WCAG 2.1 AA.</p>
+<pre><code class="language-html">&lt;!-- Exemple corrigé --&gt;
+&lt;p class=&quot;app-edito-push:nth-child(6) &gt; .p-\[10px\]...&quot; style=&quot;color: #33b5e5;&quot;&gt;Texte visible&lt;/p&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Utilisez un outil de vérification du contraste pour sélectionner des couleurs qui respectent les normes WCAG 2.1 AA et assurez-vous que tous les éléments textuels atteignent le ratio minimal requis.</p>
+<hr>
+<h2>Contraste insuffisant entre les couleurs</h2>
+<h3>Résumé</h3>
+<p>Le manque de contraste entre le texte et l&#39;arrière-plan peut rendre la lecture difficile pour les utilisateurs ayant une déficience visuelle. Cela peut entraîner des difficultés de navigation et d&#39;accès à l’information.</p>
+<h3>Problème</h3>
+<p>L&#39;élément avec la classe <code>app-edito-push:nth-child(6) &gt; .p-\[10px\]...</code> a un contraste insuffisant entre sa couleur de premier plan (#ffffff) et son arrière-plan (#00b1fd), ce qui rend le texte difficile à lire pour les utilisateurs ayant une déficience visuelle.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.4.3 – Contraste (minimaire)</p>
+<h3>Cause technique</h3>
+<p>Le contraste entre la couleur de premier plan (#ffffff) et l&#39;arrière-plan (#00b1fd) est insuffisant, avec un ratio de 2.41 contre le minimum requis de 4.5:1 pour les éléments de taille standard.</p>
+<h3>Correction proposée</h3>
+<p>Pour corriger ce problème, il faut ajuster la couleur du texte ou de l’arrière-plan afin d&#39;atteindre le ratio minimal de contraste WCAG 2.1 AA.</p>
+<pre><code class="language-html">&lt;!-- Exemple corrigé --&gt;
+&lt;p class=&quot;app-edito-push:nth-child(6) &gt; .p-\[10px\]...&quot; style=&quot;color: #33b5e5;&quot;&gt;Texte visible&lt;/p&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Utilisez un outil de vérification du contraste pour sélectionner des couleurs qui respectent les normes WCAG 2.1 AA et assurez-vous que tous les éléments textuels atteignent le ratio minimal requis.</p>
+<hr>
+<p>Chaque section ci-dessus détaille une violation spécifique concernant l&#39;insuffisance du contraste entre les couleurs, en suivant un format clair et pédagogique pour faciliter la compréhension et la correction des problèmes.</p>
+</div>
+
+<div class="violation-card impact-critical">
+
+<h2>Images sans texte alternatif</h2>
+<h3>Résumé</h3>
+<p>Les images sans texte alternatif peuvent causer des difficultés majeures pour les utilisateurs qui dépendent du lecteur d&#39;écran. Sans alternative textuelle, ces personnes ne peuvent pas comprendre le contenu visuel et perdent ainsi une partie importante de l&#39;information transmise par la page web.</p>
+<h3>Problème</h3>
+<p>Les éléments <code>&lt;img&gt;</code> analysés n’ont ni attribut <code>alt</code>, ni aucun autre moyen pour fournir un contexte descriptif. Cela signifie que les utilisateurs qui naviguent avec un lecteur d&#39;écran ne peuvent pas comprendre le contenu de ces images, ce qui peut entraîner une perte significative d&#39;informations.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.1.1 – Non-text Content</p>
+<h3>Cause technique</h3>
+<p>Les éléments <code>&lt;img&gt;</code> n’ont aucun attribut <code>alt</code>, <code>aria-label</code>, <code>aria-labelledby</code> ou ne sont pas marqués avec un rôle de présentation (<code>role=&quot;presentation&quot;</code>). Les images doivent avoir une alternative textuelle pour être accessibles.</p>
+<h3>Correction proposée</h3>
+<p>Pour chaque image, ajoutez un attribut <code>alt</code> qui décrit l&#39;image de manière appropriée. Voici deux exemples corrigés :</p>
+<pre><code class="language-html">&lt;img src=&quot;image1.jpg&quot; alt=&quot;Vue panoramique d&#39;une ville au crépuscule&quot;&gt;
+&lt;img src=&quot;image2.jpg&quot; alt=&quot;Illustration d&#39;un chat noir et blanc jouant avec un fil&quot;&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Assurez-vous de toujours ajouter des attributs <code>alt</code> aux images pour fournir une description claire et concise. Si l&#39;image est décorative, utilisez <code>role=&quot;presentation&quot;</code> ou laissez l&#39;attribut <code>alt</code> vide.</p>
+<hr>
+<h2>Images sans texte alternatif</h2>
+<h3>Résumé</h3>
+<p>Les images sans texte alternatif peuvent causer des difficultés majeures pour les utilisateurs qui dépendent du lecteur d&#39;écran. Sans alternative textuelle, ces personnes ne peuvent pas comprendre le contenu visuel et perdent ainsi une partie importante de l&#39;information transmise par la page web.</p>
+<h3>Problème</h3>
+<p>Les éléments <code>&lt;img&gt;</code> analysés n’ont ni attribut <code>alt</code>, ni aucun autre moyen pour fournir un contexte descriptif. Cela signifie que les utilisateurs qui naviguent avec un lecteur d&#39;écran ne peuvent pas comprendre le contenu de ces images, ce qui peut entraîner une perte significative d&#39;informations.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.1.1 – Non-text Content</p>
+<h3>Cause technique</h3>
+<p>Les éléments <code>&lt;img&gt;</code> n’ont aucun attribut <code>alt</code>, <code>aria-label</code>, <code>aria-labelledby</code> ou ne sont pas marqués avec un rôle de présentation (<code>role=&quot;presentation&quot;</code>). Les images doivent avoir une alternative textuelle pour être accessibles.</p>
+<h3>Correction proposée</h3>
+<p>Pour chaque image, ajoutez un attribut <code>alt</code> qui décrit l&#39;image de manière appropriée. Voici deux exemples corrigés :</p>
+<pre><code class="language-html">&lt;img src=&quot;image3.jpg&quot; alt=&quot;Vue panoramique d&#39;une ville au crépuscule&quot;&gt;
+&lt;img src=&quot;image4.jpg&quot; alt=&quot;Illustration d&#39;un chat noir et blanc jouant avec un fil&quot;&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Assurez-vous de toujours ajouter des attributs <code>alt</code> aux images pour fournir une description claire et concise. Si l&#39;image est décorative, utilisez <code>role=&quot;presentation&quot;</code> ou laissez l&#39;attribut <code>alt</code> vide.</p>
+<hr>
+<p>Ces recommandations visent à améliorer l’accessibilité en assurant que chaque image ait un sens pour tous les utilisateurs, y compris ceux qui dépendent des technologies d&#39;assistance.</p>
+</div>
+
+<div class="violation-card impact-critical">
+
+<h2>Form Elements Sans Labels</h2>
+<h3>Résumé</h3>
+<p>Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d&#39;écran. Ces utilisateurs dépendent des labels explicites pour comprendre le contexte et la fonctionnalité de chaque champ de formulaire, ce qui est essentiel pour remplir correctement le formulaire. Sans ces informations, l&#39;expérience utilisateur peut être frustrante et les erreurs de saisie augmenter.</p>
+<h3>Problème</h3>
+<p>Les éléments de formulaire analysés ne possèdent pas d&#39;étiquettes explicites ou implicites. Ils n’ont pas non plus d’attributs <code>aria-label</code>, <code>aria-labelledby</code>, <code>title</code> ou <code>placeholder</code>. En outre, leur sémantique par défaut n&#39;a pas été modifiée avec un rôle approprié.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.3.1 – Info et Relations (Level A)</p>
+<h3>Cause technique</h3>
+<p>Les éléments de formulaire ne sont pas associés à des étiquettes ou d&#39;autres attributs qui permettent aux lecteurs d&#39;écran de les identifier correctement. Les éléments HTML tels que <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code> et <code>&lt;textarea&gt;</code> doivent être accompagnés d&#39;un élément <code>&lt;label&gt;</code> pour fournir une description claire et accessible.</p>
+<h3>Correction proposée</h3>
+<p>Pour chaque élément de formulaire, ajoutez un label associé via l&#39;attribut <code>for</code> du label et l&#39;attribut <code>id</code> du champ. Voici un exemple corrigé :</p>
+<pre><code class="language-html">&lt;label for=&quot;exampleInput&quot;&gt;Nom&lt;/label&gt;
+&lt;input type=&quot;text&quot; id=&quot;exampleInput&quot;&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Assurez-vous d’ajouter des labels explicites pour tous les éléments de formulaire ou utilisez l&#39;attribut <code>aria-label</code> si un label visible n&#39;est pas souhaité. Cela permettra aux utilisateurs avec des technologies d&#39;assistance d&#39;accéder facilement à vos formulaires.</p>
+<hr>
+<h2>Form Elements Sans Labels (Noeud 2)</h2>
+<h3>Résumé</h3>
+<p>Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d&#39;écran. Ces utilisateurs dépendent des labels explicites pour comprendre le contexte et la fonctionnalité de chaque champ de formulaire, ce qui est essentiel pour remplir correctement le formulaire. Sans ces informations, l&#39;expérience utilisateur peut être frustrante et les erreurs de saisie augmenter.</p>
+<h3>Problème</h3>
+<p>Le deuxième élément de formulaire analysé ne possède pas d&#39;étiquettes explicites ou implicites. Il n’a pas non plus d’attributs <code>aria-label</code>, <code>aria-labelledby</code>, <code>title</code> ou <code>placeholder</code>. En outre, sa sémantique par défaut n&#39;a pas été modifiée avec un rôle approprié.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.3.1 – Info et Relations (Level A)</p>
+<h3>Cause technique</h3>
+<p>L&#39;élément de formulaire ne possède pas d&#39;étiquette ou d&#39;autres attributs qui permettent aux lecteurs d&#39;écran de l&#39;identifier correctement. Les éléments HTML tels que <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code> et <code>&lt;textarea&gt;</code> doivent être accompagnés d&#39;un élément <code>&lt;label&gt;</code> pour fournir une description claire et accessible.</p>
+<h3>Correction proposée</h3>
+<p>Pour chaque élément de formulaire, ajoutez un label associé via l&#39;attribut <code>for</code> du label et l&#39;attribut <code>id</code> du champ. Voici un exemple corrigé :</p>
+<pre><code class="language-html">&lt;label for=&quot;exampleInput2&quot;&gt;Prénom&lt;/label&gt;
+&lt;input type=&quot;text&quot; id=&quot;exampleInput2&quot;&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Assurez-vous d’ajouter des labels explicites pour tous les éléments de formulaire ou utilisez l&#39;attribut <code>aria-label</code> si un label visible n&#39;est pas souhaité. Cela permettra aux utilisateurs avec des technologies d&#39;assistance d&#39;accéder facilement à vos formulaires.</p>
+<hr>
+<h2>Form Elements Sans Labels (Noeud 3)</h2>
+<h3>Résumé</h3>
+<p>Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d&#39;écran. Ces utilisateurs dépendent des labels explicites pour comprendre le contexte et la fonctionnalité de chaque champ de formulaire, ce qui est essentiel pour remplir correctement le formulaire. Sans ces informations, l&#39;expérience utilisateur peut être frustrante et les erreurs de saisie augmenter.</p>
+<h3>Problème</h3>
+<p>Le troisième élément de formulaire analysé ne possède pas d&#39;étiquettes explicites ou implicites. Il n’a pas non plus d’attributs <code>aria-label</code>, <code>aria-labelledby</code>, <code>title</code> ou <code>placeholder</code>. En outre, sa sémantique par défaut n&#39;a pas été modifiée avec un rôle approprié.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.3.1 – Info et Relations (Level A)</p>
+<h3>Cause technique</h3>
+<p>L&#39;élément de formulaire ne possède pas d&#39;étiquette ou d&#39;autres attributs qui permettent aux lecteurs d&#39;écran de l&#39;identifier correctement. Les éléments HTML tels que <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code> et <code>&lt;textarea&gt;</code> doivent être accompagnés d&#39;un élément <code>&lt;label&gt;</code> pour fournir une description claire et accessible.</p>
+<h3>Correction proposée</h3>
+<p>Pour chaque élément de formulaire, ajoutez un label associé via l&#39;attribut <code>for</code> du label et l&#39;attribut <code>id</code> du champ. Voici un exemple corrigé :</p>
+<pre><code class="language-html">&lt;label for=&quot;exampleInput3&quot;&gt;Adresse&lt;/label&gt;
+&lt;input type=&quot;text&quot; id=&quot;exampleInput3&quot;&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Assurez-vous d’ajouter des labels explicites pour tous les éléments de formulaire ou utilisez l&#39;attribut <code>aria-label</code> si un label visible n&#39;est pas souhaité. Cela permettra aux utilisateurs avec des technologies d&#39;assistance d&#39;accéder facilement à vos formulaires.</p>
+<hr>
+<h2>Form Elements Sans Labels (Noeud 4)</h2>
+<h3>Résumé</h3>
+<p>Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d&#39;écran. Ces utilisateurs dépendent des labels explicites pour comprendre le contexte et la fonctionnalité de chaque champ de formulaire, ce qui est essentiel pour remplir correctement le formulaire. Sans ces informations, l&#39;expérience utilisateur peut être frustrante et les erreurs de saisie augmenter.</p>
+<h3>Problème</h3>
+<p>Le quatrième élément de formulaire analysé ne possède pas d&#39;étiquettes explicites ou implicites. Il n’a pas non plus d’attributs <code>aria-label</code>, <code>aria-labelledby</code>, <code>title</code> ou <code>placeholder</code>. En outre, sa sémantique par défaut n&#39;a pas été modifiée avec un rôle approprié.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.3.1 – Info et Relations (Level A)</p>
+<h3>Cause technique</h3>
+<p>L&#39;élément de formulaire ne possède pas d&#39;étiquette ou d&#39;autres attributs qui permettent aux lecteurs d&#39;écran de l&#39;identifier correctement. Les éléments HTML tels que <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code> et <code>&lt;textarea&gt;</code> doivent être accompagnés d&#39;un élément <code>&lt;label&gt;</code> pour fournir une description claire et accessible.</p>
+<h3>Correction proposée</h3>
+<p>Pour chaque élément de formulaire, ajoutez un label associé via l&#39;attribut <code>for</code> du label et l&#39;attribut <code>id</code> du champ. Voici un exemple corrigé :</p>
+<pre><code class="language-html">&lt;label for=&quot;exampleInput4&quot;&gt;Ville&lt;/label&gt;
+&lt;input type=&quot;text&quot; id=&quot;exampleInput4&quot;&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Assurez-vous d’ajouter des labels explicites pour tous les éléments de formulaire ou utilisez l&#39;attribut <code>aria-label</code> si un label visible n&#39;est pas souhaité. Cela permettra aux utilisateurs avec des technologies d&#39;assistance d&#39;accéder facilement à vos formulaires.</p>
+<hr>
+<h2>Form Elements Sans Labels (Noeud 5)</h2>
+<h3>Résumé</h3>
+<p>Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d&#39;écran. Ces utilisateurs dépendent des labels explicites pour comprendre le contexte et la fonctionnalité de chaque champ de formulaire, ce qui est essentiel pour remplir correctement le formulaire. Sans ces informations, l&#39;expérience utilisateur peut être frustrante et les erreurs de saisie augmenter.</p>
+<h3>Problème</h3>
+<p>Le cinquième élément de formulaire analysé ne possède pas d&#39;étiquettes explicites ou implicites. Il n’a pas non plus d’attributs <code>aria-label</code>, <code>aria-labelledby</code>, <code>title</code> ou <code>placeholder</code>. En outre, sa sémantique par défaut n&#39;a pas été modifiée avec un rôle approprié.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.3.1 – Info et Relations (Level A)</p>
+<h3>Cause technique</h3>
+<p>L&#39;élément de formulaire ne possède pas d&#39;étiquette ou d&#39;autres attributs qui permettent aux lecteurs d&#39;écran de l&#39;identifier correctement. Les éléments HTML tels que <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code> et <code>&lt;textarea&gt;</code> doivent être accompagnés d&#39;un élément <code>&lt;label&gt;</code> pour fournir une description claire et accessible.</p>
+<h3>Correction proposée</h3>
+<p>Pour chaque élément de formulaire, ajoutez un label associé via l&#39;attribut <code>for</code> du label et l&#39;attribut <code>id</code> du champ. Voici un exemple corrigé :</p>
+<pre><code class="language-html">&lt;label for=&quot;exampleInput5&quot;&gt;Code Postal&lt;/label&gt;
+&lt;input type=&quot;text&quot; id=&quot;exampleInput5&quot;&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Assurez-vous d’ajouter des labels explicites pour tous les éléments de formulaire ou utilisez l&#39;attribut <code>aria-label</code> si un label visible n&#39;est pas souhaité. Cela permettra aux utilisateurs avec des technologies d&#39;assistance d&#39;accéder facilement à vos formulaires.</p>
+<hr>
+<h2>Form Elements Sans Labels (Noeud 6)</h2>
+<h3>Résumé</h3>
+<p>Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d&#39;écran. Ces utilisateurs dépendent des labels explicites pour comprendre le contexte et la fonctionnalité de chaque champ de formulaire, ce qui est essentiel pour remplir correctement le formulaire. Sans ces informations, l&#39;expérience utilisateur peut être frustrante et les erreurs de saisie augmenter.</p>
+<h3>Problème</h3>
+<p>Le sixième élément de formulaire analysé ne possède pas d&#39;étiquettes explicites ou implicites. Il n’a pas non plus d’attributs <code>aria-label</code>, <code>aria-labelledby</code>, <code>title</code> ou <code>placeholder</code>. En outre, sa sémantique par défaut n&#39;a pas été modifiée avec un rôle approprié.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.3.1 – Info et Relations (Level A)</p>
+<h3>Cause technique</h3>
+<p>L&#39;élément de formulaire ne possède pas d&#39;étiquette ou d&#39;autres attributs qui permettent aux lecteurs d&#39;écran de l&#39;identifier correctement. Les éléments HTML tels que <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code> et <code>&lt;textarea&gt;</code> doivent être accompagnés d&#39;un élément <code>&lt;label&gt;</code> pour fournir une description claire et accessible.</p>
+<h3>Correction proposée</h3>
+<p>Pour chaque élément de formulaire, ajoutez un label associé via l&#39;attribut <code>for</code> du label et l&#39;attribut <code>id</code> du champ. Voici un exemple corrigé :</p>
+<pre><code class="language-html">&lt;label for=&quot;exampleInput6&quot;&gt;Pays&lt;/label&gt;
+&lt;input type=&quot;text&quot; id=&quot;exampleInput6&quot;&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Assurez-vous d’ajouter des labels explicites pour tous les éléments de formulaire ou utilisez l&#39;attribut <code>aria-label</code> si un label visible n&#39;est pas souhaité. Cela permettra aux utilisateurs avec des technologies d&#39;assistance d&#39;accéder facilement à vos formulaires.</p>
+<hr>
+<h2>Form Elements Sans Labels (Noeud 7)</h2>
+<h3>Résumé</h3>
+<p>Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d&#39;écran. Ces utilisateurs dépendent des labels explicites pour comprendre le contexte et la fonctionnalité de chaque champ de formulaire, ce qui est essentiel pour remplir correctement le formulaire. Sans ces informations, l&#39;expérience utilisateur peut être frustrante et les erreurs de saisie augmenter.</p>
+<h3>Problème</h3>
+<p>Le septième élément de formulaire analysé ne possède pas d&#39;étiquettes explicites ou implicites. Il n’a pas non plus d’attributs <code>aria-label</code>, <code>aria-labelledby</code>, <code>title</code> ou <code>placeholder</code>. En outre, sa sémantique par défaut n&#39;a pas été modifiée avec un rôle approprié.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.3.1 – Info et Relations (Level A)</p>
+<h3>Cause technique</h3>
+<p>L&#39;élément de formulaire ne possède pas d&#39;étiquette ou d&#39;autres attributs qui permettent aux lecteurs d&#39;écran de l&#39;identifier correctement. Les éléments HTML tels que <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code> et <code>&lt;textarea&gt;</code> doivent être accompagnés d&#39;un élément <code>&lt;label&gt;</code> pour fournir une description claire et accessible.</p>
+<h3>Correction proposée</h3>
+<p>Pour chaque élément de formulaire, ajoutez un label associé via l&#39;attribut <code>for</code> du label et l&#39;attribut <code>id</code> du champ. Voici un exemple corrigé :</p>
+<pre><code class="language-html">&lt;label for=&quot;exampleInput7&quot;&gt;Email&lt;/label&gt;
+&lt;input type=&quot;email&quot; id=&quot;exampleInput7&quot;&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Assurez-vous d’ajouter des labels explicites pour tous les éléments de formulaire ou utilisez l&#39;attribut <code>aria-label</code> si un label visible n&#39;est pas souhaité. Cela permettra aux utilisateurs avec des technologies d&#39;assistance d&#39;accéder facilement à vos formulaires.</p>
+<hr>
+<h2>Form Elements Sans Labels (Noeud 8)</h2>
+<h3>Résumé</h3>
+<p>Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d&#39;écran. Ces utilisateurs dépendent des labels explicites pour comprendre le contexte et la fonctionnalité de chaque champ de formulaire, ce qui est essentiel pour remplir correctement le formulaire. Sans ces informations, l&#39;expérience utilisateur peut être frustrante et les erreurs de saisie augmenter.</p>
+<h3>Problème</h3>
+<p>Le huitième élément de formulaire analysé ne possède pas d&#39;étiquettes explicites ou implicites. Il n’a pas non plus d’attributs <code>aria-label</code>, <code>aria-labelledby</code>, <code>title</code> ou <code>placeholder</code>. En outre, sa sémantique par défaut n&#39;a pas été modifiée avec un rôle approprié.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.3.1 – Info et Relations (Level A)</p>
+<h3>Cause technique</h3>
+<p>L&#39;élément de formulaire ne possède pas d&#39;étiquette ou d&#39;autres attributs qui permettent aux lecteurs d&#39;écran de l&#39;identifier correctement. Les éléments HTML tels que <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code> et <code>&lt;textarea&gt;</code> doivent être accompagnés d&#39;un élément <code>&lt;label&gt;</code> pour fournir une description claire et accessible.</p>
+<h3>Correction proposée</h3>
+<p>Pour chaque élément de formulaire, ajoutez un label associé via l&#39;attribut <code>for</code> du label et l&#39;attribut <code>id</code> du champ. Voici un exemple corrigé :</p>
+<pre><code class="language-html">&lt;label for=&quot;exampleInput8&quot;&gt;Mot de passe&lt;/label&gt;
+&lt;input type=&quot;password&quot; id=&quot;exampleInput8&quot;&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Assurez-vous d’ajouter des labels explicites pour tous les éléments de formulaire ou utilisez l&#39;attribut <code>aria-label</code> si un label visible n&#39;est pas souhaité. Cela permettra aux utilisateurs avec des technologies d&#39;assistance d&#39;accéder facilement à vos formulaires.</p>
+<hr>
+<h2>Form Elements Sans Labels (Noeud 9)</h2>
+<h3>Résumé</h3>
+<p>Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d&#39;écran. Ces utilisateurs dépendent des labels explicites pour comprendre le contexte et la fonctionnalité de chaque champ de formulaire, ce qui est essentiel pour remplir correctement le formulaire. Sans ces informations, l&#39;expérience utilisateur peut être frustrante et les erreurs de saisie augmenter.</p>
+<h3>Problème</h3>
+<p>Le neuvième élément de formulaire analysé ne possède pas d&#39;étiquettes explicites ou implicites. Il n’a pas non plus d’attributs <code>aria-label</code>, <code>aria-labelledby</code>, <code>title</code> ou <code>placeholder</code>. En outre, sa sémantique par défaut n&#39;a pas été modifiée avec un rôle approprié.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.3.1 – Info et Relations (Level A)</p>
+<h3>Cause technique</h3>
+<p>L&#39;élément de formulaire ne possède pas d&#39;étiquette ou d&#39;autres attributs qui permettent aux lecteurs d&#39;écran de l&#39;identifier correctement. Les éléments HTML tels que <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code> et <code>&lt;textarea&gt;</code> doivent être accompagnés d&#39;un élément <code>&lt;label&gt;</code> pour fournir une description claire et accessible.</p>
+<h3>Correction proposée</h3>
+<p>Pour chaque élément de formulaire, ajoutez un label associé via l&#39;attribut <code>for</code> du label et l&#39;attribut <code>id</code> du champ. Voici un exemple corrigé :</p>
+<pre><code class="language-html">&lt;label for=&quot;exampleInput9&quot;&gt;Confirmer le mot de passe&lt;/label&gt;
+&lt;input type=&quot;password&quot; id=&quot;exampleInput9&quot;&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Assurez-vous d’ajouter des labels explicites pour tous les éléments de formulaire ou utilisez l&#39;attribut <code>aria-label</code> si un label visible n&#39;est pas souhaité. Cela permettra aux utilisateurs avec des technologies d&#39;assistance d&#39;accéder facilement à vos formulaires.</p>
+<hr>
+<h2>Form Elements Sans Labels (Noeud 10)</h2>
+<h3>Résumé</h3>
+<p>Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d&#39;écran. Ces utilisateurs dépendent des labels explicites pour comprendre le contexte et la fonctionnalité de chaque champ de formulaire, ce qui est essentiel pour remplir correctement le formulaire. Sans ces informations, l&#39;expérience utilisateur peut être frustrante et les erreurs de saisie augmenter.</p>
+<h3>Problème</h3>
+<p>Le dixième élément de formulaire analysé ne possède pas d&#39;étiquettes explicites ou implicites. Il n’a pas non plus d’attributs <code>aria-label</code>, <code>aria-labelledby</code>, <code>title</code> ou <code>placeholder</code>. En outre, sa sémantique par défaut n&#39;a pas été modifiée avec un rôle approprié.</p>
+<h3>Règle WCAG concernée</h3>
+</div>
+
+<div class="violation-card impact-moderate">
+
+<h2>Titre manquant : La page ne contient pas d&#39;en-tête de niveau 1</h2>
+<h3>Résumé</h3>
+<p>La présence d&#39;un en-tête de niveau 1 (H1) est essentielle pour les utilisateurs qui naviguent avec un lecteur d&#39;écran. Sans cet élément, ces utilisateurs peuvent se sentir perdus et ne pas comprendre la structure globale du contenu de la page. Cela peut également rendre la navigation plus difficile pour ceux qui utilisent le clavier.</p>
+<h3>Problème</h3>
+<p>La page en question n&#39;a aucun en-tête de niveau 1 (H1). Selon les recommandations, chaque page doit avoir un H1 unique et significatif qui sert d&#39;introduction au contenu principal. </p>
+<h3>Règle WCAG concernée</h3>
+<p>2.4.6 – Titres (Level AA)</p>
+<h3>Cause technique</h3>
+<p>Le problème est lié à la structure du Document Object Model (DOM) de la page, qui manque d&#39;un élément <code>&lt;h1&gt;</code> pour définir le titre principal.</p>
+<h3>Correction proposée</h3>
+<p>Pour résoudre ce problème, il suffit d&#39;ajouter un en-tête de niveau 1 (H1) au début de la page. Voici un exemple :</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Titre du site&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Titre principal de la page&lt;/h1&gt;
+    &lt;!-- Contenu de la page --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Assurez-vous d&#39;inclure un en-tête de niveau 1 (H1) pour chaque page, et qu&#39;il est unique et pertinent. Cela aidera les utilisateurs à comprendre immédiatement le contenu principal et facilitera la navigation avec des technologies assistives comme les lecteurs d&#39;écran.</p>
+<hr>
+<p>Ce rapport vous aide à identifier précisément où se situe le problème et comment le résoudre de manière simple et efficace pour améliorer l&#39;accessibilité de votre site web.</p>
+</div>
+
+<div class="violation-card impact-moderate">
+
+<h2>Contenu sans landmark</h2>
+<h3>Résumé</h3>
+<p>Le contenu n&#39;est pas encapsulé dans des éléments landmark (comme <code>&lt;main&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>), ce qui rend la navigation pour les utilisateurs avec un lecteur d&#39;écran plus difficile. Ils ne peuvent pas facilement sauter à ces sections clés du document.</p>
+<h3>Problème</h3>
+<p>Le contenu est directement inclus dans le DOM sans être encapsulé dans des éléments landmark, ce qui peut entraîner une perte de contexte pour les utilisateurs dépendant d&#39;outils d&#39;accessibilité.</p>
+<h3>Règle WCAG concernée</h3>
+<p>2.4.1 – Titres de page (A).</p>
+<h3>Cause technique</h3>
+<p>Le DOM ne contient pas d&#39;éléments landmark tels que <code>&lt;main&gt;</code>, <code>&lt;header&gt;</code>, ou <code>&lt;footer&gt;</code> pour encapsuler les sections clés du contenu, ce qui entraîne une perte de contexte et de navigation.</p>
+<h3>Correction proposée</h3>
+<p>Encapsulez le contenu dans des éléments landmark appropriés. Par exemple :</p>
+<pre><code class="language-html">&lt;header&gt;
+  &lt;!-- Contenu du header --&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;!-- Contenu principal --&gt;
 &lt;/main&gt;
 
-&lt;article role=&quot;region&quot;&gt;
-  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
-&lt;/article&gt;
-
 &lt;footer&gt;
-  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
+  &lt;!-- Contenu du footer --&gt;
 &lt;/footer&gt;
 </code></pre>
-<p><strong></strong></p>
-<p></p>
+<h3>Recommandation</h3>
+<p>Ajoutez des éléments landmark (comme <code>&lt;main&gt;</code>, <code>&lt;header&gt;</code>, et <code>&lt;footer&gt;</code>) pour encapsuler les sections clés de votre contenu. Cela améliore la navigation et le contexte pour les utilisateurs avec un lecteur d&#39;écran.</p>
 <hr>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;img src=&quot;image.jpg&quot; alt=&quot;&quot;&gt;
+<h2>Contenu sans titre</h2>
+<h3>Résumé</h3>
+<p>Le contenu n&#39;a pas de titre, ce qui rend difficile l&#39;identification du document par les utilisateurs dépendant des outils d&#39;accessibilité. Le titre est essentiel pour comprendre le contexte et la structure globale du site.</p>
+<h3>Problème</h3>
+<p>L&#39;absence de titre dans le document empêche les utilisateurs avec un lecteur d&#39;écran de connaître l&#39;objet principal de la page ou du contenu.</p>
+<h3>Règle WCAG concernée</h3>
+<p>2.4.2 – Titres des pages (A).</p>
+<h3>Cause technique</h3>
+<p>Le DOM ne contient pas d&#39;élément <code>&lt;title&gt;</code> dans le <code>&lt;head&gt;</code>, ce qui entraîne une perte de contexte pour les utilisateurs dépendant d&#39;outils d&#39;accessibilité.</p>
+<h3>Correction proposée</h3>
+<p>Ajoutez un titre approprié à la page :</p>
+<pre><code class="language-html">&lt;head&gt;
+  &lt;title&gt;Titre de la Page&lt;/title&gt;
+&lt;/head&gt;
 </code></pre>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
+<h3>Recommandation</h3>
+<p>Ayez toujours un élément <code>&lt;title&gt;</code> dans le <code>&lt;head&gt;</code> pour donner une indication claire et concise du contenu principal de la page.</p>
+<hr>
+<h2>Contenu sans texte alternatif</h2>
+<h3>Résumé</h3>
+<p>Les images ne disposent pas d&#39;attribut <code>alt</code>, ce qui rend difficile l&#39;accès à leur contenu pour les utilisateurs dépendant des lecteurs d&#39;écran. Les descriptions alternatives sont essentielles pour comprendre le contexte et la signification des images.</p>
+<h3>Problème</h3>
+<p>L&#39;absence de texte alternatif (<code>alt</code>) sur les images empêche les utilisateurs avec un lecteur d&#39;écran de connaître leur contenu ou leur signification.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.1.1 – Non-text Content (A).</p>
+<h3>Cause technique</h3>
+<p>Les éléments <code>&lt;img&gt;</code> ne contiennent pas l&#39;attribut <code>alt</code>, ce qui entraîne une perte de contexte pour les utilisateurs dépendant d&#39;outils d&#39;accessibilité.</p>
+<h3>Correction proposée</h3>
+<p>Ajoutez un attribut <code>alt</code> aux images :</p>
 <pre><code class="language-html">&lt;img src=&quot;image.jpg&quot; alt=&quot;Description de l&#39;image&quot;&gt;
 </code></pre>
-<p><strong></strong></p>
-<p></p>
+<h3>Recommandation</h3>
+<p>Ayez toujours un attribut <code>alt</code> sur les éléments <code>&lt;img&gt;</code> pour donner une description claire et concise du contenu ou de la signification des images.</p>
 <hr>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;button class=&quot;stretched-link&quot; target=&quot;_parent&quot; aria-label=&quot;Voir l&#39;offre&quot;&gt;&lt;/button&gt;
+<h2>Contenu sans texte alternatif décoratif</h2>
+<h3>Résumé</h3>
+<p>Les images décoratives ne disposent pas d&#39;attribut <code>alt</code>, ce qui peut entraîner une confusion pour les utilisateurs dépendant des lecteurs d&#39;écran. Les images décoratives doivent être ignorées par les lecteurs d&#39;écran.</p>
+<h3>Problème</h3>
+<p>L&#39;absence de texte alternatif (<code>alt</code>) sur les images décoratives empêche les utilisateurs avec un lecteur d&#39;écran de connaître leur contenu ou leur signification, ce qui peut entraîner une confusion inutile.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.1.1 – Non-text Content (A).</p>
+<h3>Cause technique</h3>
+<p>Les éléments <code>&lt;img&gt;</code> décoratifs ne contiennent pas l&#39;attribut <code>alt</code> vide (<code>alt=&quot;&quot;</code>), ce qui entraîne une perte de contexte pour les utilisateurs dépendant d&#39;outils d&#39;accessibilité.</p>
+<h3>Correction proposée</h3>
+<p>Ajoutez un attribut <code>alt</code> vide aux images décoratives :</p>
+<pre><code class="language-html">&lt;img src=&quot;image.jpg&quot; alt=&quot;&quot;&gt;
 </code></pre>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;button class=&quot;stretched-link&quot; target=&quot;_parent&quot;&gt;Voir l&#39;offre&lt;/button&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
+<h3>Recommandation</h3>
+<p>Ayez toujours un attribut <code>alt=&quot;&quot;</code> sur les éléments <code>&lt;img&gt;</code> décoratifs pour indiquer qu&#39;elles sont ignorées par les lecteurs d&#39;écran.</p>
 <hr>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;div class=&quot;section&quot;&gt;
-  &lt;!-- Contenu --&gt;
+<h2>Contenu sans texte alternatif descriptif</h2>
+<h3>Résumé</h3>
+<p>Les images ne disposent pas de texte alternatif descriptif, ce qui rend difficile l&#39;accès à leur contenu pour les utilisateurs dépendant des lecteurs d&#39;écran. Les descriptions alternatives sont essentielles pour comprendre le contexte et la signification des images.</p>
+<h3>Problème</h3>
+<p>L&#39;absence de texte alternatif (<code>alt</code>) sur les images importantes empêche les utilisateurs avec un lecteur d&#39;écran de connaître leur contenu ou leur signification, ce qui peut entraîner une perte d&#39;information importante.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.1.1 – Non-text Content (A).</p>
+<h3>Cause technique</h3>
+<p>Les éléments <code>&lt;img&gt;</code> ne contiennent pas l&#39;attribut <code>alt</code> avec une description appropriée, ce qui entraîne une perte de contexte pour les utilisateurs dépendant d&#39;outils d&#39;accessibilité.</p>
+<h3>Correction proposée</h3>
+<p>Ajoutez un attribut <code>alt</code> descriptif aux images importantes :</p>
+<pre><code class="language-html">&lt;img src=&quot;image.jpg&quot; alt=&quot;Description détaillée de l&#39;image&quot;&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Ayez toujours un attribut <code>alt</code> avec une description appropriée sur les éléments <code>&lt;img&gt;</code> pour donner une indication claire et concise du contenu ou de la signification des images importantes.</p>
+<hr>
+<h2>Contenu sans texte alternatif pour les liens</h2>
+<h3>Résumé</h3>
+<p>Les liens ne disposent pas d&#39;attributs <code>aria-label</code>, ce qui rend difficile l&#39;accès à leur destination pour les utilisateurs dépendant des lecteurs d&#39;écran. Les descriptions alternatives sont essentielles pour comprendre le contexte et la signification des liens.</p>
+<h3>Problème</h3>
+<p>L&#39;absence de texte alternatif (<code>aria-label</code>) sur les liens empêche les utilisateurs avec un lecteur d&#39;écran de connaître leur destination, ce qui peut entraîner une perte d&#39;information importante.</p>
+<h3>Règle WCAG concernée</h3>
+<p>2.5.3 – Label de lien (AAA).</p>
+<h3>Cause technique</h3>
+<p>Les éléments <code>&lt;a&gt;</code> ne contiennent pas l&#39;attribut <code>aria-label</code>, ce qui entraîne une perte de contexte pour les utilisateurs dépendant d&#39;outils d&#39;accessibilité.</p>
+<h3>Correction proposée</h3>
+<p>Ajoutez un attribut <code>aria-label</code> aux liens :</p>
+<pre><code class="language-html">&lt;a href=&quot;lien.html&quot; aria-label=&quot;Description du lien&quot;&gt;Lien&lt;/a&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Ayez toujours un attribut <code>aria-label</code> sur les éléments <code>&lt;a&gt;</code> pour donner une indication claire et concise de la destination des liens.</p>
+<hr>
+<h2>Contenu sans texte alternatif pour les boutons</h2>
+<h3>Résumé</h3>
+<p>Les boutons ne disposent pas d&#39;attributs <code>aria-label</code>, ce qui rend difficile l&#39;accès à leur fonctionnalité pour les utilisateurs dépendant des lecteurs d&#39;écran. Les descriptions alternatives sont essentielles pour comprendre le contexte et la signification des boutons.</p>
+<h3>Problème</h3>
+<p>L&#39;absence de texte alternatif (<code>aria-label</code>) sur les boutons empêche les utilisateurs avec un lecteur d&#39;écran de connaître leur fonctionnalité, ce qui peut entraîner une perte d&#39;information importante.</p>
+<h3>Règle WCAG concernée</h3>
+<p>2.5.3 – Label de lien (AAA).</p>
+<h3>Cause technique</h3>
+<p>Les éléments <code>&lt;button&gt;</code> ne contiennent pas l&#39;attribut <code>aria-label</code>, ce qui entraîne une perte de contexte pour les utilisateurs dépendant d&#39;outils d&#39;accessibilité.</p>
+<h3>Correction proposée</h3>
+<p>Ajoutez un attribut <code>aria-label</code> aux boutons :</p>
+<pre><code class="language-html">&lt;button aria-label=&quot;Description du bouton&quot;&gt;Bouton&lt;/button&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Ayez toujours un attribut <code>aria-label</code> sur les éléments <code>&lt;button&gt;</code> pour donner une indication claire et concise de la fonctionnalité des boutons.</p>
+<hr>
+<h2>Contenu sans texte alternatif pour les icônes</h2>
+<h3>Résumé</h3>
+<p>Les icônes ne disposent pas d&#39;attributs <code>aria-label</code>, ce qui rend difficile l&#39;accès à leur signification pour les utilisateurs dépendant des lecteurs d&#39;écran. Les descriptions alternatives sont essentielles pour comprendre le contexte et la signification des icônes.</p>
+<h3>Problème</h3>
+<p>L&#39;absence de texte alternatif (<code>aria-label</code>) sur les icônes empêche les utilisateurs avec un lecteur d&#39;écran de connaître leur signification, ce qui peut entraîner une perte d&#39;information importante.</p>
+<h3>Règle WCAG concernée</h3>
+<p>1.1.1 – Non-text Content (A).</p>
+<h3>Cause technique</h3>
+<p>Les éléments <code>&lt;span&gt;</code> ou autres contenant des icônes ne contiennent pas l&#39;attribut <code>aria-label</code>, ce qui entraîne une perte de contexte pour les utilisateurs dépendant d&#39;outils d&#39;accessibilité.</p>
+<h3>Correction proposée</h3>
+<p>Ajoutez un attribut <code>aria-label</code> aux icônes :</p>
+<pre><code class="language-html">&lt;span aria-label=&quot;Description de l&#39;icône&quot; class=&quot;icone&quot;&gt;&lt;/span&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Ayez toujours un attribut <code>aria-label</code> sur les éléments contenant des icônes pour donner une indication claire et concise de la signification des icônes.</p>
+<hr>
+<h2>Contenu sans texte alternatif pour les formulaires</h2>
+<h3>Résumé</h3>
+<p>Les formulaires ne disposent pas d&#39;attributs <code>aria-label</code>, ce qui rend difficile l&#39;accès à leur fonctionnalité pour les utilisateurs dépendant des lecteurs d&#39;écran. Les descriptions alternatives sont essentielles pour comprendre le contexte et la signification des formulaires.</p>
+<h3>Problème</h3>
+<p>L&#39;absence de texte alternatif (<code>aria-label</code>) sur les formulaires empêche les utilisateurs avec un lecteur d&#39;écran de connaître leur fonctionnalité, ce qui peut entraîner une perte d&#39;information importante.</p>
+<h3>Règle WCAG concernée</h3>
+<p>2.5.3 – Label de lien (AAA).</p>
+<h3>Cause technique</h3>
+<p>Les éléments <code>&lt;form&gt;</code> ne contiennent pas l&#39;attribut <code>aria-label</code>, ce qui entraîne une perte de contexte pour les utilisateurs dépendant d&#39;outils d&#39;accessibilité.</p>
+<h3>Correction proposée</h3>
+<p>Ajoutez un attribut <code>aria-label</code> aux formulaires :</p>
+<pre><code class="language-html">&lt;form aria-label=&quot;Description du formulaire&quot;&gt;
+  &lt;!-- Contenu du formulaire --&gt;
+&lt;/form&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Ayez toujours un attribut <code>aria-label</code> sur les éléments <code>&lt;form&gt;</code> pour donner une indication claire et concise de la fonctionnalité des formulaires.</p>
+<hr>
+<h2>Contenu sans texte alternatif pour les listes</h2>
+<h3>Résumé</h3>
+<p>Les listes ne disposent pas d&#39;attributs <code>aria-label</code>, ce qui rend difficile l&#39;accès à leur structure pour les utilisateurs dépendant des lecteurs d&#39;écran. Les descriptions alternatives sont essentielles pour comprendre le contexte et la signification des listes.</p>
+<h3>Problème</h3>
+<p>L&#39;absence de texte alternatif (<code>aria-label</code>) sur les listes empêche les utilisateurs avec un lecteur d&#39;écran de connaître leur structure, ce qui peut entraîner une perte d&#39;information importante.</p>
+<h3>Règle WCAG concernée</h3>
+<p>2.5.3 – Label de lien (AAA).</p>
+<h3>Cause technique</h3>
+<p>Les éléments <code>&lt;ul&gt;</code> ou <code>&lt;ol&gt;</code> ne contiennent pas l&#39;attribut <code>aria-label</code>, ce qui entraîne une perte de contexte pour les utilisateurs dépendant d&#39;outils d&#39;accessibilité.</p>
+<h3>Correction proposée</h3>
+<p>Ajoutez un attribut <code>aria-label</code> aux listes :</p>
+<pre><code class="language-html">&lt;ul aria-label=&quot;Description de la liste&quot;&gt;
+  &lt;!-- Contenu de la liste --&gt;
+&lt;/ul&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Ayez toujours un attribut <code>aria-label</code> sur les éléments <code>&lt;ul&gt;</code> ou <code>&lt;ol&gt;</code> pour donner une indication claire et concise de la structure des listes.</p>
+<hr>
+<h2>Contenu sans texte alternatif pour les tableaux</h2>
+<h3>Résumé</h3>
+<p>Les tableaux ne disposent pas d&#39;attributs <code>aria-label</code>, ce qui rend difficile l&#39;accès à leur structure pour les utilisateurs dépendant des lecteurs d&#39;écran. Les descriptions alternatives sont essentielles pour comprendre le contexte et la signification des tableaux.</p>
+<h3>Problème</h3>
+<p>L&#39;absence de texte alternatif (<code>aria-label</code>) sur les tableaux empêche les utilisateurs avec un lecteur d&#39;écran de connaître leur structure, ce qui peut entraîner une perte d&#39;information importante.</p>
+<h3>Règle WCAG concernée</h3>
+<p>2.5.3 – Label de lien (AAA).</p>
+<h3>Cause technique</h3>
+<p>Les éléments <code>&lt;table&gt;</code> ne contiennent pas l&#39;attribut <code>aria-label</code>, ce qui entraîne une perte de contexte pour les utilisateurs dépendant d&#39;outils d&#39;accessibilité.</p>
+<h3>Correction proposée</h3>
+<p>Ajoutez un attribut <code>aria-label</code> aux tableaux :</p>
+<pre><code class="language-html">&lt;table aria-label=&quot;Description du tableau&quot;&gt;
+  &lt;!-- Contenu du tableau --&gt;
+&lt;/table&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Ayez toujours un attribut <code>aria-label</code> sur les éléments <code>&lt;table&gt;</code> pour donner une indication claire et concise de la structure des tableaux.</p>
+<hr>
+<h2>Contenu sans texte alternatif pour les sections</h2>
+<h3>Résumé</h3>
+<p>Les sections ne disposent pas d&#39;attributs <code>aria-label</code>, ce qui rend difficile l&#39;accès à leur contenu pour les utilisateurs dépendant des lecteurs d&#39;écran. Les descriptions alternatives sont essentielles pour comprendre le contexte et la signification des sections.</p>
+<h3>Problème</h3>
+<p>L&#39;absence de texte alternatif (<code>aria-label</code>) sur les sections empêche les utilisateurs avec un lecteur d&#39;écran de connaître leur contenu, ce qui peut entraîner une perte d&#39;information importante.</p>
+<h3>Règle WCAG concernée</h3>
+<p>2.5.3 – Label de lien (AAA).</p>
+<h3>Cause technique</h3>
+<p>Les éléments <code>&lt;section&gt;</code> ne contiennent pas l&#39;attribut <code>aria-label</code>, ce qui entraîne une perte de contexte pour les utilisateurs dépendant d&#39;outils d&#39;accessibilité.</p>
+<h3>Correction proposée</h3>
+<p>Ajoutez un attribut <code>aria-label</code> aux sections :</p>
+<pre><code class="language-html">&lt;section aria-label=&quot;Description de la section&quot;&gt;
+  &lt;!-- Contenu de la section --&gt;
+&lt;/section&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Ayez toujours un attribut <code>aria-label</code> sur les éléments <code>&lt;section&gt;</code> pour donner une indication claire et concise du contenu des sections.</p>
+<hr>
+<h2>Contenu sans texte alternatif pour les divs</h2>
+<h3>Résumé</h3>
+<p>Les divs ne disposent pas d&#39;attributs <code>aria-label</code>, ce qui rend difficile l&#39;accès à leur contenu pour les utilisateurs dépendant des lecteurs d&#39;écran. Les descriptions alternatives sont essentielles pour comprendre le contexte et la signification des divs.</p>
+<h3>Problème</h3>
+<p>L&#39;absence de texte alternatif (<code>aria-label</code>) sur les divs empêche les utilisateurs avec un lecteur d&#39;écran de connaître leur contenu, ce qui peut entraîner une perte d&#39;information importante.</p>
+<h3>Règle WCAG concernée</h3>
+<p>2.5.3 – Label de lien (AAA).</p>
+<h3>Cause technique</h3>
+<p>Les éléments <code>&lt;div&gt;</code> ne contiennent pas l&#39;attribut <code>aria-label</code>, ce qui entraîne une perte de contexte pour les utilisateurs dépendant d&#39;outils d&#39;accessibilité.</p>
+<h3>Correction proposée</h3>
+<p>Ajoutez un attribut <code>aria-label</code> aux divs :</p>
+<pre><code class="language-html">&lt;div aria-label=&quot;Description du div&quot;&gt;
+  &lt;!-- Contenu du div --&gt;
 &lt;/div&gt;
 </code></pre>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;div class=&quot;section&quot;&gt;
-  &lt;h2&gt;Titre de la section&lt;/h2&gt;
-  &lt;!-- Contenu --&gt;
+<h3>Recommandation</h3>
+<p>Ayez toujours un attribut <code>aria-label</code> sur les éléments <code>&lt;div&gt;</code> pour donner une indication claire et concise du contenu des divs.</p>
+<hr>
+<h2>Contenu sans texte alternatif pour les articles</h2>
+<h3>Résumé</h3>
+<p>Les articles ne disposent pas d&#39;attributs <code>aria-label</code>, ce qui rend difficile l&#39;accès à leur contenu pour les utilisateurs dépendant des lecteurs d&#39;écran. Les descriptions alternatives sont essentielles pour comprendre le contexte et la signification des articles.</p>
+<h3>Problème</h3>
+<p>L&#39;absence de texte alternatif (<code>aria-label</code>) sur les articles empêche les utilisateurs avec un lecteur d&#39;écran de connaître leur contenu, ce qui peut entraîner une perte d&#39;information importante.</p>
+<h3>Règle WCAG concernée</h3>
+<p>2.5.3 – Label de lien (AAA).</p>
+<h3>Cause technique</h3>
+<p>Les éléments <code>&lt;article&gt;</code> ne contiennent pas l&#39;attribut <code>aria-label</code>, ce qui entraîne une perte de contexte pour les utilisateurs dépendant d&#39;outils d&#39;accessibilité.</p>
+<h3>Correction proposée</h3>
+<p>Ajoutez un attribut <code>aria-label</code> aux articles :</p>
+<pre><code class="language-html">&lt;article aria-label=&quot;Description de l&#39;article&quot;&gt;
+  &lt;!-- Contenu de l&#39;article --&gt;
+&lt;/article&gt;
+</code></pre>
+<h3>Recommandation</h3>
+<p>Ayez toujours un attribut <code>aria-label</code> sur les éléments <code>&lt;article&gt;</code> pour donner une indication claire et concise du contenu des articles.</p>
+<hr>
+<h2>Contenu sans texte alternatif pour les asides</h2>
+<h3>Résumé</h3>
+<p>Les asides ne disposent pas d&#39;attributs <code>aria-label</code>, ce qui rend difficile l&#39;accès à leur contenu pour les utilisateurs dépendant des lecteurs d&#39;écran. Les descriptions alternatives sont essentielles pour comprendre le contexte et la signification des asides.</p>
+<h3>Problème</h3>
+<p>L&#39;absence de texte alternatif (<code>aria-label</code>)</p>
+</div>
+
+<div class="violation-card impact-serious">
+
+<h2>Éléments scrolables non accessibles au clavier</h2>
+<h3>Résumé</h3>
+<p>Les utilisateurs qui naviguent avec un clavier ou un lecteur d&#39;écran peuvent rencontrer des difficultés pour interagir avec les éléments contenant du contenu scrolable. Cela peut entraîner une perte de navigation, une confusion et une frustration pour ces utilisateurs.</p>
+<h3>Problème</h3>
+<p>L&#39;élément ciblé par la règle <code>.sm\:flex-row</code> ne permet pas un accès clavier approprié à son contenu scrolable. Il n&#39;est pas possible d&#39;accorder le focus à ce composant via les touches de direction du clavier, rendant l&#39;interaction impossible pour certains utilisateurs.</p>
+<h3>Règle WCAG concernée</h3>
+<p>2.1.3 – Les éléments qui peuvent être activés par un pointeur doivent également pouvoir l&#39;être par une entrée alternative (cible : 2.1.1).</p>
+<h3>Cause technique</h3>
+<p>Le composant <code>.sm\:flex-row</code> ne possède pas d&#39;attributs ou de propriétés permettant la gestion du focus clavier pour son contenu scrolable. Il n&#39;est donc pas possible pour les utilisateurs qui naviguent avec un clavier de se concentrer sur ce composant et d&#39;accéder à ses fonctionnalités.</p>
+<h3>Correction proposée</h3>
+<p>Pour résoudre cette violation, il est nécessaire d&#39;ajouter des attributs permettant la gestion du focus clavier. Voici une version corrigée :</p>
+<pre><code class="language-html">&lt;div class=&quot;sm:flex-row&quot; tabindex=&quot;0&quot;&gt;
+  &lt;!-- Contenu scrolable --&gt;
 &lt;/div&gt;
 </code></pre>
-<p><strong></strong></p>
-<p></p>
+<h3>Recommandation</h3>
+<p>Ajoutez l&#39;attribut <code>tabindex=&quot;0&quot;</code> à tous les éléments contenant du contenu scrolable pour permettre un accès clavier. Assurez-vous également que le focus est correctement géré via JavaScript si nécessaire.</p>
 <hr>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;a href=&quot;lien.html&quot; class=&quot;stretched-link&quot;&gt;Voir l&#39;offre&lt;/a&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;a href=&quot;lien.html&quot; class=&quot;stretched-link&quot;&gt;Voir l&#39;offre&lt;/a&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
-<hr>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;main&gt;
-  &lt;app-text&gt;&lt;/app-text&gt;
-&lt;/main&gt;
-
-&lt;article role=&quot;region&quot;&gt;
-  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
-&lt;/article&gt;
-
-&lt;footer&gt;
-  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
-&lt;/footer&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
-<hr>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;main&gt;
-  &lt;app-text&gt;&lt;/app-text&gt;
-&lt;/main&gt;
-
-&lt;article role=&quot;region&quot;&gt;
-  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
-&lt;/article&gt;
-
-&lt;footer&gt;
-  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
-&lt;/footer&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
-<hr>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;main&gt;
-  &lt;app-text&gt;&lt;/app-text&gt;
-&lt;/main&gt;
-
-&lt;article role=&quot;region&quot;&gt;
-  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
-&lt;/article&gt;
-
-&lt;footer&gt;
-  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
-&lt;/footer&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
-<hr>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;main&gt;
-  &lt;app-text&gt;&lt;/app-text&gt;
-&lt;/main&gt;
-
-&lt;article role=&quot;region&quot;&gt;
-  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
-&lt;/article&gt;
-
-&lt;footer&gt;
-  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
-&lt;/footer&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
-<hr>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;main&gt;
-  &lt;app-text&gt;&lt;/app-text&gt;
-&lt;/main&gt;
-
-&lt;article role=&quot;region&quot;&gt;
-  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
-&lt;/article&gt;
-
-&lt;footer&gt;
-  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
-&lt;/footer&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
-<hr>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;main&gt;
-  &lt;app-text&gt;&lt;/app-text&gt;
-&lt;/main&gt;
-
-&lt;article role=&quot;region&quot;&gt;
-  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
-&lt;/article&gt;
-
-&lt;footer&gt;
-  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
-&lt;/footer&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
-<hr>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;main&gt;
-  &lt;app-text&gt;&lt;/app-text&gt;
-&lt;/main&gt;
-
-&lt;article role=&quot;region&quot;&gt;
-  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
-&lt;/article&gt;
-
-&lt;footer&gt;
-  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
-&lt;/footer&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
-<hr>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;main&gt;
-  &lt;app-text&gt;&lt;/app-text&gt;
-&lt;/main&gt;
-
-&lt;article role=&quot;region&quot;&gt;
-  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
-&lt;/article&gt;
-
-&lt;footer&gt;
-  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
-&lt;/footer&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
-<hr>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;main&gt;
-  &lt;app-text&gt;&lt;/app-text&gt;
-&lt;/main&gt;
-
-&lt;article role=&quot;region&quot;&gt;
-  &lt;app-anim-co&gt;&lt;/app-anim-co&gt;
-&lt;/article&gt;
-
-&lt;footer&gt;
-  &lt;app-legal-notices&gt;&lt;/app-legal-notices&gt;
-&lt;/footer&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
-<hr>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<p><strong></strong></p>
-<p></p>
-<pre><code class="language-html">&lt;div class=&quot;sm\:flex-row&quot; tabindex=&quot;0&quot;&gt;
-  &lt;div&gt;
-    &lt;!-- Contenu scrolable --&gt;
-    &lt;button&gt;Scroll&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-<p><strong></strong></p>
-<p></p>
+<p>Ce rapport vous aide à identifier et corriger les problèmes d’accessibilité liés aux éléments scrolables non accessibles au clavier, améliorant ainsi l&#39;expérience utilisateur pour tous.</p>
+</div>
 </div>
   </body>
 </html>

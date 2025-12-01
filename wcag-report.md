@@ -1,32 +1,35 @@
-# Rapport WCAG
+<div class="violation-card impact-serious">
 
-
-
-## Éléments aria-hidden contenant du contenu focusable
+## Éléments aria-hidden contenant des éléments focusables
 
 ### Résumé
-Les éléments avec l'attribut `aria-hidden` qui sont également capables d'accaparer le focus peuvent perturber les utilisateurs qui naviguent par clavier ou avec un lecteur d'écran. Cela peut entraîner une navigation confuse et rendre difficile la localisation des éléments réellement interactifs, ce qui est particulièrement problématique pour les personnes ayant des limitations visuelles.
+
+Les utilisateurs qui naviguent avec le clavier ou l'aide d'un lecteur d'écran peuvent rencontrer des problèmes de navigation et de compréhension du contenu s'il existe des éléments `aria-hidden` qui sont eux-mêmes focusables ou contiennent des éléments focusables. Cela peut entraîner une confusion, car ces éléments ne devraient pas être accessibles via le clavier ni lus par un lecteur d'écran.
 
 ### Problème
-Les éléments `c-icon-button` situés dans le DOM sous l'attribut `aria-hidden` sont capables d'accaparer le focus. Cela signifie que ces éléments peuvent être sélectionnés par un utilisateur naviguant avec une souris, un clavier ou un lecteur d'écran, ce qui est incohérent avec la finalité de l'attribut `aria-hidden`.
+
+Les éléments `.aspect-square:nth-child(2) > .mx-1.will-change-transform > .bottom-3\.5.right-3\.5.left-3\.5 > .items-end.gap-3.justify-between > .self-end.flex-shrink-0 > c-icon-button` et `.aspect-square:nth-child(4) > .mx-1.will-change-transform > .bottom-3\.5.right-3\.5.left-3\.5 > .items-end.gap-3.justify-between > .self-end.flex-shrink-0 > c-icon-button` sont marqués avec `aria-hidden="true"` mais restent focusables. Cela va à l'encontre des bonnes pratiques d'accessibilité et peut perturber la navigation de l'utilisateur.
 
 ### Règle WCAG concernée
-2.4.1 – Navigabilité (A)
+
+2.4.1 - Navigateurs de page (A)
 
 ### Cause technique
-L'attribut `aria-hidden` est utilisé pour indiquer que le contenu ne doit pas être rendu accessible par les technologies d’assistance, mais certains éléments sous cet attribut restent capables de recevoir le focus. Cela peut entraîner une mauvaise expérience utilisateur et des problèmes de navigation.
+
+Les éléments `aria-hidden="true"` doivent être non focusables et ne pas contenir d'éléments focusables. Dans ce cas, les éléments ciblés sont marqués avec `aria-hidden` mais restent dans le flux du clavier, causant une incohérence entre l'intention de masquer ces éléments pour les lecteurs d'écran et leur comportement réel.
 
 ### Correction proposée
-Pour corriger cette violation, il faut soit supprimer l'attribut `aria-hidden` si les éléments doivent être accessibles, soit désactiver la possibilité d'accaparer le focus pour ces éléments. Voici un exemple de correction :
+
+Pour résoudre ce problème, il faut soit désactiver la focusabilité des éléments en question, soit les retirer complètement du DOM si leur présence n'est pas nécessaire. Voici un exemple de correction :
 
 ```html
 <div class="aspect-square" tabindex="-1">
   <div class="mx-1 will-change-transform">
-    <div class="bottom-3.5 right-3.5 left-3.5">
+    <div class="bottom-3\.5 right-3\.5 left-3\.5">
       <div class="items-end gap-3 justify-between">
         <div class="self-end flex-shrink-0">
-          <!-- Désactiver le focus pour l'élément c-icon-button -->
-          <c-icon-button tabindex="-1" aria-hidden="true"></c-icon-button>
+          <!-- Désactiver la focusabilité -->
+          <c-icon-button aria-hidden="true" tabindex="-1"></c-icon-button>
         </div>
       </div>
     </div>
@@ -35,768 +38,1254 @@ Pour corriger cette violation, il faut soit supprimer l'attribut `aria-hidden` s
 ```
 
 ### Recommandation
-Assurez-vous que les éléments avec `aria-hidden` ne soient pas capables d'accaparer le focus. Si ces éléments doivent être interactifs, supprimez l'attribut `aria-hidden`. Sinon, désactivez la possibilité de recevoir le focus pour ces éléments en utilisant `tabindex="-1"` ou un autre moyen approprié.
+
+Assurez-vous que tous les éléments marqués avec `aria-hidden` ne sont pas focusables et n'ont pas d'enfants focusables. Si un élément doit être caché pour l'accessibilité mais reste dans le DOM, ajoutez `tabindex="-1"` à cet élément pour le rendre non focusable.
 
 ---
 
-Ce rapport vous guide pas à pas dans la correction des problèmes liés aux éléments `aria-hidden` contenant du contenu focusable. N'hésitez pas si vous avez besoin d'aide supplémentaire !
+Ce rapport vous aide à identifier précisément les problèmes liés aux éléments `aria-hidden` et propose des solutions concrètes pour améliorer l'accessibilité de votre site.
 
+</div>
+
+<div class="violation-card impact-serious">
 
 ## ARIA attributs interdits sur certains rôles
 
 ### Résumé
-L'utilisation d'attributs ARIA non autorisés peut entraîner une mauvaise interaction avec les lecteurs d'écran et d'autres technologies d'assistance, rendant l'interface utilisateur moins accessible pour les personnes ayant des besoins spécifiques. Cela peut perturber la navigation et la compréhension du contenu.
+
+L'utilisation d'attributs ARIA non autorisés peut entraîner une mauvaise interaction avec les lecteurs d'écran et d'autres technologies d'assistance, rendant l'interface utilisateur moins accessible pour les personnes ayant des besoins spécifiques. Cela peut également créer de la confusion et perturber l'expérience utilisateur.
 
 ### Problème
-L'attribut `aria-label` est utilisé sur un élément `<c-button>` sans attribut de rôle valide, ce qui est interdit par les normes ARIA. L'absence d'un rôle approprié peut entraîner une mauvaise interprétation du lecteur d'écran.
+
+L'attribut `aria-label` est utilisé sur un élément `<c-button>` sans attribut de rôle valide, ce qui est interdit par les normes ARIA. L'absence d'un rôle approprié peut entraîner une mauvaise interprétation par les technologies d'assistance.
 
 ### Règle WCAG concernée
-2.5.3 – Pointer sur l’élément (en utilisant des rôles et des attributs ARIA pour définir correctement les éléments).
+
+1.3.1 – Info et relations
 
 ### Cause technique
-L'attribut `aria-label` est utilisé sans que le rôle de l'élément `<c-button>` ne soit spécifié ou qu'il n'utilise un rôle valide qui accepte cet attribut. Cela peut entraîner une mauvaise interprétation par les technologies d'assistance.
+
+L'élément `<c-button>` utilise l'attribut `aria-label` sans un rôle ARIA valide qui permettrait son utilisation. Selon les spécifications ARIA, certains attributs ne sont autorisés que pour des rôles spécifiques.
 
 ### Correction proposée
-Pour corriger cette violation, il est nécessaire de définir un rôle approprié pour l'élément `<c-button>` ou de supprimer l'attribut `aria-label` si le rôle n'est pas adapté. Par exemple :
+
+Pour corriger cette violation, il est nécessaire d'ajouter un rôle approprié à l'élément `<c-button>` ou de remplacer `aria-label` par une autre méthode conforme. Par exemple :
 
 ```html
-<c-button prependicon="search" role="button" aria-label="Rechercher">
+<c-button prependicon="search" role="button" aria-label="Rechercher"></c-button>
 ```
 
 ### Recommandation
-Assurez-vous que chaque élément ARIA utilise les attributs et rôles appropriés pour éviter toute confusion avec les technologies d'assistance. Consultez la documentation ARIA pour vérifier les attributs autorisés par le rôle de l'élément.
+
+Vérifiez toujours la compatibilité des attributs ARIA avec les rôles utilisés dans votre code pour éviter ces violations. Utilisez les ressources officielles comme le site de W3C pour vous assurer que vos implémentations sont conformes.
 
 ---
 
-Ce rapport vous guide pas à pas dans la correction des problèmes liés aux attributs ARIA interdits, en mettant l'accent sur l'importance d'une structure DOM correcte et conforme aux normes WCAG.
+Ce rapport est conçu pour aider à comprendre et corriger rapidement les problèmes d'accessibilité, tout en maintenant une communication claire et chaleureuse.
 
+</div>
+
+<div class="violation-card impact-critical">
 
 ## Bouton sans texte discernable
 
 ### Résumé
-Un utilisateur qui navigue avec un lecteur d'écran ne pourra pas comprendre la fonctionnalité du bouton car il n'y a aucun texte visible ou non visible (comme aria-label) pour le décrire. Cela peut entraîner une confusion et des difficultés de navigation, rendant l'interface utilisateur moins accessible.
+
+Les utilisateurs qui naviguent avec des lecteurs d'écran ne peuvent pas comprendre la fonctionnalité du bouton car il n'y a aucun texte visible ou accessible pour les écrans tactiles. Cela peut entraîner une confusion et un manque de clarté, rendant l'interaction difficile voire impossible.
 
 ### Problème
-Le bouton en question, identifié par la classe `.max-w-3.c-button--size-m.c-button--variation-primary`, ne contient pas de texte visible ou non visible qui permettrait à un lecteur d'écran de le décrire. Il n'y a pas d'attribut aria-label, aria-labelledby, title, et aucun label explicite ou implicite associé.
+
+Le bouton ciblé par le sélecteur CSS `.max-w-3.c-button--size-m.c-button--variation-primary` ne contient pas de texte visible pour les lecteurs d'écran. Il n'a ni `aria-label`, ni `aria-labelledby`, ni `title`, et aucun `<label>` explicite ou implicite associé.
 
 ### Règle WCAG concernée
-1.3.2 – Contraste (minimaire)
 
-**Correction :**
-La règle correcte est en réalité 2.5.3 – Éléments de commande discernables.
+1.3.2 – Contraste (Minimum)
+
+**Correction : Cette règle est incorrecte dans le contexte de la description fournie, elle devrait être 4.1.2 - Éléments d'interface et 2.5.3 - Consignes de navigation**
 
 ### Cause technique
-L'élément bouton n'a pas d'attribut aria-label, aria-labelledby ou title pour fournir un texte alternatif qui peut être lu par les lecteurs d'écran. De plus, l'élément ne contient pas de texte visible et n'est pas associé à un label explicite ou implicite.
+
+Le bouton n'a pas de texte interne visible pour les lecteurs d'écran ni aucun attribut `aria` ou `title` qui pourrait fournir une indication claire sur sa fonctionnalité.
 
 ### Correction proposée
-Pour résoudre ce problème, vous pouvez ajouter un attribut aria-label avec une description claire du bouton :
+
+Pour résoudre ce problème, il est nécessaire d'ajouter un texte explicite au bouton ou d'utiliser l'un des attributs `aria-label`, `aria-labelledby`, ou de lui associer un `<label>`.
 
 ```html
-<button class="max-w-3 c-button--size-m c-button--variation-primary" aria-label="Valider la commande">></button>
-```
-
-Ou si le texte est visible pour les utilisateurs visuels, vous pouvez simplement ajouter ce texte au bouton :
-
-```html
-<button class="max-w-3 c-button--size-m c-button--variation-primary">Valider la commande</button>
+<button
+  class="max-w-3 c-button--size-m c-button--variation-primary"
+  aria-label="Valider la commande"
+>
+  Valider
+</button>
 ```
 
 ### Recommandation
-Ajoutez un aria-label ou du texte visible à chaque bouton pour assurer que les utilisateurs de lecteurs d'écran peuvent comprendre sa fonction. Assurez-vous également que le texte est concis et descriptif.
+
+Ajoutez toujours du texte explicite aux boutons pour les rendre compréhensibles par tous les utilisateurs, y compris ceux qui utilisent des lecteurs d'écran. Utilisez l'attribut `aria-label` si le texte ne peut pas être affiché visuellement.
 
 ---
 
-**Note :**
-Il semble qu'il y ait une confusion dans la règle WCAG mentionnée initialement (1.3.2 – Contraste). La violation décrite correspond en réalité à 2.5.3 – Éléments de commande discernables, qui exige que les boutons aient un texte ou une étiquette claire pour être compris par tous les utilisateurs, y compris ceux qui utilisent des lecteurs d'écran.
+Ce rapport est conçu pour vous aider à comprendre et corriger rapidement les problèmes de conformité WCAG sur votre site web, en gardant un ton professionnel mais chaleureux.
 
+</div>
+
+<div class="violation-card impact-serious">
 
 ## Contraste insuffisant entre les couleurs
 
 ### Résumé
-Le contraste insuffisant entre le texte et son arrière-plan rend la lecture difficile pour les utilisateurs ayant une déficience visuelle. Cela peut entraîner des difficultés de navigation, un stress oculaire accru et une perte d'efficacité lors de l'utilisation du site.
+
+Le contraste insuffisant entre le texte et la couleur d'arrière-plan peut rendre l’information difficile à lire pour les utilisateurs ayant une déficience visuelle. Cela peut entraîner des difficultés de lecture, un stress oculaire et une perte de productivité pour ces utilisateurs.
 
 ### Problème
-Les éléments suivants ont un contraste insuffisant entre la couleur du texte et celle de l'arrière-plan :
 
-1. **Cible :** `.border-[\#00b5e2]`
-   - Le contraste est de 2.41, alors qu'il devrait être d'au moins 4.5:1 selon les normes WCAG.
-
-2. **Cible :** `app-edito-push:nth-child(6) > .p-[10px].sm\:p-[30px].shadow-[0px_4px_16px_0px_rgba\(18\,18\,18\,0\.08\)] > .md\:grid-cols-[200px_1fr].gap-5.grid > .md\:w-[200px].gap-2.5.mt-3 > .sm\:min-h-[490px].pb-0.p-2.5 > .py-1.5.backdrop-blur-[2px].px-2 > .leading-normal.text-base.font-bold`
-   - Le contraste est de 2.41, alors qu'il devrait être d'au moins 4.5:1 selon les normes WCAG.
-
-3. **Cible :** `app-edito-push:nth-child(6) > .p-[10px].sm\:p-[30px].shadow-[0px_4px_16px_0px_rgba\(18\,18\,18\,0\.08\)] > .md\:grid-cols-[200px_1fr].gap-5.grid > .md\:w-[200px].gap-2.5.mt-3 > .sm\:min-h-[490px].pb-0.p-2.5 > .py-1.5.backdrop-blur-[2px].px-2 > .leading-none.text-xs > p`
-   - Le contraste est de 2.41, alors qu'il devrait être d'au moins 4.5:1 selon les normes WCAG.
+Plusieurs éléments sur le site n'atteignent pas la norme WCAG 2.1 AA en termes de contraste entre les couleurs du texte et l’arrière-plan. Par exemple, un élément avec un texte bleu (#00b5e2) sur un fond blanc (#ffffff) a un ratio de contraste insuffisant (2.41 au lieu des 4.5 requis pour une taille de police normale).
 
 ### Règle WCAG concernée
+
 1.4.3 – Contraste (minimaire)
 
 ### Cause technique
-Les éléments ne respectent pas le ratio de contraste minimal requis par la règle WCAG 2.1 AA pour assurer une lisibilité adéquate des informations textuelles pour les utilisateurs ayant une déficience visuelle.
+
+Le problème est dû à l'utilisation de couleurs qui ne respectent pas les seuils de contraste nécessaires selon la taille et le poids des polices. Par exemple, pour un texte en 12pt normal sur fond blanc, le ratio doit être au moins 4.5:1.
 
 ### Correction proposée
 
-Pour chaque élément, il faut ajuster la couleur du texte ou de l'arrière-plan afin d'atteindre le ratio de contraste minimal requis. Voici quelques exemples :
+Pour corriger ce problème, il faut ajuster les couleurs du texte ou de l'arrière-plan afin d’atteindre le ratio minimal requis par WCAG 2.1 AA. Voici un exemple corrigé pour le premier élément :
 
 ```html
-<!-- Exemple 1 : Ajustement pour .border-[\#00b5e2] -->
-<span class="border-[#00b5e2]" style="color: #333;">Texte avec un meilleur contraste</span>
-
-<!-- Exemple 2 : Ajustement pour app-edito-push:nth-child(6) > .p-[10px].sm\:p-[30px]... -->
-<span class="leading-normal.text-base.font-bold" style="color: #333;">Texte avec un meilleur contraste</span>
-
-<!-- Exemple 3 : Ajustement pour app-edito-push:nth-child(6) > .p-[10px].sm\:p-[30px]... -->
-<p class="leading-none.text-xs" style="color: #333;">Texte avec un meilleur contraste</p>
+<div class="border-[#00b5e2]">
+  <!-- Remplacez #00b5e2 par une couleur plus foncée ou plus claire qui respecte les normes de contraste -->
+  Contenu du div...
+</div>
 ```
 
 ### Recommandation
-Utilisez des outils en ligne comme le [Contrast Checker](https://webaim.org/resources/contrastchecker/) pour vérifier et ajuster les couleurs afin de respecter la règle WCAG 2.1 AA sur le contraste.
 
-N'oubliez pas d'effectuer ces tests régulièrement lors des mises à jour du site pour maintenir une expérience utilisateur optimale pour tous les utilisateurs, y compris ceux ayant des déficiences visuelles.
-
-
-## Images sans texte alternatif
-
-### Résumé
-Les images sans texte alternatif peuvent causer des difficultés majeures pour les utilisateurs qui se déplacent avec un lecteur d'écran. Ces utilisateurs ne recevront aucune information sur l'image, ce qui peut entraîner une confusion et une perte de contexte dans la navigation du site web.
-
-### Problème
-Les éléments `<img>` analysés n'ont pas d'attribut `alt`, ni d'attributs `aria-label` ou `aria-labelledby`. Ils ne possèdent pas non plus de rôle `none` ou `presentation`.
-
-### Règle WCAG concernée
-1.1.1 – Non-text Content.
-
-### Cause technique
-Les images doivent avoir un attribut `alt` qui décrit l'image ou indique son fonctionnement si elle est décorative. Les éléments d'images sans ces attributs ne permettent pas aux utilisateurs de comprendre le contenu visuel du site web, ce qui va à l'encontre des exigences de la règle WCAG 1.1.1.
-
-### Correction proposée
-Pour chaque image manquante en `alt`, ajoutez un attribut `alt` approprié ou utilisez un rôle `none` pour les images décoratives sans information supplémentaire.
-
-```html
-<!-- Exemple d'image avec alt -->
-<img src="image.jpg" alt="Description de l'image">
-
-<!-- Pour une image décorative -->
-<img src="deco-image.png" role="presentation">
-```
-
-### Recommandation
-Ajoutez un attribut `alt` à chaque élément `<img>` pour fournir des informations sur le contenu visuel. Si l'image est purement décorative et ne fournit aucune information supplémentaire, utilisez un rôle `none` ou `presentation`.
+Utilisez un outil d'analyse comme le Color Contrast Analyzer pour vérifier et ajuster automatiquement la palette de couleurs afin qu’elles répondent aux exigences WCAG. Assurez-vous que chaque élément respecte les normes de contraste avant sa mise en production.
 
 ---
 
-## Images sans texte alternatif
+## Contraste insuffisant entre les couleurs (Element 2)
 
 ### Résumé
-Les images sans texte alternatif peuvent causer des difficultés majeures pour les utilisateurs qui se déplacent avec un lecteur d'écran. Ces utilisateurs ne recevront aucune information sur l'image, ce qui peut entraîner une confusion et une perte de contexte dans la navigation du site web.
+
+Le texte blanc (#ffffff) sur un fond bleu (#00b1fd) ne répond pas aux exigences minimales de contraste WCAG, rendant la lecture difficile pour les utilisateurs ayant une déficience visuelle. Cela peut entraîner des difficultés d'accessibilité et une perte de lisibilité.
 
 ### Problème
-Les éléments `<img>` analysés n'ont pas d'attribut `alt`, ni d'attributs `aria-label` ou `aria-labelledby`. Ils ne possèdent pas non plus de rôle `none` ou `presentation`.
+
+Un élément avec du texte blanc (#ffffff) sur un fond bleu (#00b1fd), en taille 12pt et en gras, ne respecte pas le ratio minimal de contraste WCAG (4.5:1 pour la taille normale).
 
 ### Règle WCAG concernée
-1.1.1 – Non-text Content.
+
+1.4.3 – Contraste (minimaire)
 
 ### Cause technique
-Les images doivent avoir un attribut `alt` qui décrit l'image ou indique son fonctionnement si elle est décorative. Les éléments d'images sans ces attributs ne permettent pas aux utilisateurs de comprendre le contenu visuel du site web, ce qui va à l'encontre des exigences de la règle WCAG 1.1.1.
+
+Le texte blanc sur un fond bleu clair n'atteint pas les seuils de contraste nécessaires, ce qui peut rendre l’information difficile à lire pour les utilisateurs ayant une déficience visuelle.
 
 ### Correction proposée
-Pour chaque image manquante en `alt`, ajoutez un attribut `alt` approprié ou utilisez un rôle `none` pour les images décoratives sans information supplémentaire.
+
+Pour corriger cette violation, il faut ajuster la couleur du texte ou du fond. Par exemple :
 
 ```html
-<!-- Exemple d'image avec alt -->
-<img src="image.jpg" alt="Description de l'image">
-
-<!-- Pour une image décorative -->
-<img src="deco-image.png" role="presentation">
+<div class="leading-normal text-base font-bold" style="color: #007acc;">
+  <!-- Remplacez le texte blanc par un autre qui respecte les normes de contraste -->
+  Contenu du div...
+</div>
 ```
 
 ### Recommandation
-Ajoutez un attribut `alt` à chaque élément `<img>` pour fournir des informations sur le contenu visuel. Si l'image est purement décorative et ne fournit aucune information supplémentaire, utilisez un rôle `none` ou `presentation`.
 
+Testez régulièrement vos couleurs avec des outils d'accessibilité pour vous assurer qu’elles répondent aux exigences WCAG. Utilisez une palette de couleurs qui respecte les normes de contraste.
+
+---
+
+## Contraste insuffisant entre les couleurs (Element 3)
+
+### Résumé
+
+Le texte blanc (#ffffff) sur un fond bleu (#00b1fd), en taille 9pt, ne répond pas aux exigences minimales de contraste WCAG. Cela peut rendre la lecture difficile pour les utilisateurs ayant une déficience visuelle.
+
+### Problème
+
+Un élément avec du texte blanc (#ffffff) sur un fond bleu (#00b1fd), en taille 9pt, ne respecte pas le ratio minimal de contraste WCAG (4.5:1 pour la taille normale).
+
+### Règle WCAG concernée
+
+1.4.3 – Contraste (minimaire)
+
+### Cause technique
+
+Le texte blanc sur un fond bleu clair n'atteint pas les seuils de contraste nécessaires, ce qui peut rendre l’information difficile à lire pour les utilisateurs ayant une déficience visuelle.
+
+### Correction proposée
+
+Pour corriger cette violation, il faut ajuster la couleur du texte ou du fond. Par exemple :
+
+```html
+<div class="leading-none text-xs" style="color: #007acc;">
+  <!-- Remplacez le texte blanc par un autre qui respecte les normes de contraste -->
+  Contenu du div...
+</div>
+```
+
+### Recommandation
+
+Testez régulièrement vos couleurs avec des outils d'accessibilité pour vous assurer qu’elles répondent aux exigences WCAG. Utilisez une palette de couleurs qui respecte les normes de contraste.
+
+---
+
+Ce rapport a été généré pour aider à améliorer l'accessibilité du site en corrigeant les problèmes de contraste entre les couleurs, assurant ainsi un meilleur confort et lisibilité pour tous les utilisateurs.
+
+</div>
+
+<div class="violation-card impact-critical">
+
+## Images sans texte alternatif
+
+### Résumé
+
+Les images sans texte alternatif (alt) sont problématiques pour les utilisateurs qui naviguent avec des lecteurs d'écran. Ces derniers dépendent du texte alternatif pour comprendre le contenu visuel, ce qui est crucial pour l'accessibilité et la compréhension globale de la page.
+
+### Problème
+
+Les images dans les éléments `app-edito-push:nth-child(6)` et `app-edito-push:nth-child(7)` ne possèdent pas d'attribut alt. Elles manquent également d'autres attributs comme aria-label, aria-labelledby ou title qui pourraient fournir une description alternative.
+
+### Règle WCAG concernée
+
+1.1.1 – Non-text Content
+
+### Cause technique
+
+Les éléments `<img>` ne disposent pas de l'attribut `alt`, ni d'un rôle `none` ou `presentation`. Les images sont donc interprétées comme du contenu significatif par les lecteurs d'écran, mais sans aucune information supplémentaire pour les utilisateurs dépendant des technologies d’assistance.
+
+### Correction proposée
+
+Pour chaque image manquante en alt, ajoutez un attribut `alt` qui décrit l'image ou indique qu'elle est décorative si elle n'a pas de sens contextuel. Si l'image est purement décorative et ne transmet aucun contenu important, vous pouvez utiliser `role="presentation"` pour signaler au lecteur d'écran que cette image n'est pas significative.
+
+```html
+<!-- Pour app-edito-push:nth-child(6) -->
+<img src="image.jpg" alt="Description de l'image ou 'Image décorative' si non significative" />
+
+<!-- Pour app-edito-push:nth-child(7) -->
+<img src="image2.jpg" alt="Description de l'image ou 'Image décorative' si non significative" />
+```
+
+### Recommandation
+
+Ajoutez un attribut `alt` à chaque image pour fournir une description claire et concise. Si l'image est purement décorative, utilisez `role="presentation"` pour indiquer qu'elle n'est pas significative.
+
+---
+
+Ce rapport vous guide étape par étape pour résoudre les problèmes d'accessibilité liés aux images sans texte alternatif sur votre site web. N'hésitez pas à répéter ce processus pour chaque violation identifiée afin de garantir une meilleure expérience utilisateur pour tous, y compris ceux qui dépendent des technologies d’assistance.
+
+</div>
+
+<div class="violation-card impact-critical">
 
 ## Form Elements Sans Labels
 
 ### Résumé
-Les formes sans labels peuvent être extrêmement frustrantes pour les utilisateurs qui dépendent des lecteurs d'écran ou de l'interface utilisateur en mode clavier. Ces éléments manquent de contexte, rendant difficile la compréhension et l'utilisation correcte du formulaire par ces utilisateurs. Cela peut entraîner une mauvaise saisie de données ou même un abandon du processus.
+
+Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d'écran ou ceux qui ont besoin de clarifications supplémentaires. Cela peut entraîner une confusion sur le but et la fonctionnalité des éléments, rendant l'interaction avec ces formulaires moins intuitive et plus frustrante.
 
 ### Problème
-Les form elements identifiés ne possèdent aucun label explicite ou implicite, ni d'attributs aria-label ou aria-labelledby qui pourraient fournir le contexte nécessaire. Ils manquent également d'autres attributs comme title ou placeholder qui pourraient aider à clarifier leur fonction.
+
+Les éléments de formulaire tels que les champs de saisie, les boutons radio et autres ne sont pas associés à un label explicite ou implicite. Ils manquent également d'autres attributs comme `aria-label`, `title` ou `placeholder`.
 
 ### Règle WCAG concernée
+
 1.3.1 – Info et Relations (Level A)
 
 ### Cause technique
-Les éléments HTML tels que les champs de saisie, les boutons radio et autres contrôles de formulaire ne sont pas associés à un élément `<label>` ou n'ont pas d'attributs aria qui leur donnent une description claire. Cela peut être dû à une mauvaise structuration du DOM ou à l'absence de ces attributs lors de la création des éléments.
+
+Les éléments de formulaire n'ont pas été correctement structurés avec des labels explicites ou implicites, ni d'autres attributs comme `aria-label`, `title` ou `placeholder`. Cela peut être causé par une mauvaise structure du DOM ou un manque de compréhension sur l'importance des labels pour les éléments de formulaire.
 
 ### Correction proposée
-Pour chaque form element, il faut ajouter un label explicite ou utiliser les attributs aria-label ou aria-labelledby pour fournir le contexte nécessaire. Voici un exemple corrigé :
+
+Pour chaque élément de formulaire, ajoutez un label explicite. Par exemple :
 
 ```html
-<div class="relative items-center flex">
-  <input type="number" min="0" max="1" step="0.05" aria-label="Entrez la quantité souhaitée">
-</div>
+<label for="input1">Nom</label> <input type="text" id="input1" />
+```
+
+Si le texte du label est déjà présent dans le contenu visible et qu'il ne peut pas être ajouté directement comme balise `<label>`, vous pouvez utiliser `aria-label` ou `aria-labelledby`.
+
+```html
+<input type="text" aria-label="Nom" />
 ```
 
 ### Recommandation
-Pour chaque élément de formulaire, assurez-vous d'ajouter un label explicite ou d'utiliser les attributs aria pour fournir une description claire et concise du rôle et de l'intention de l'élément. Cela garantit que tous les utilisateurs peuvent comprendre et interagir correctement avec le formulaire.
+
+Assurez-vous que chaque élément de formulaire a un label explicite. Si le texte du label est déjà présent dans le contenu visible, utilisez `aria-label`. Cette pratique garantit une meilleure expérience utilisateur pour tous les utilisateurs, y compris ceux qui dépendent des lecteurs d'écran.
 
 ---
 
-Répétez ce format pour chaque violation identifiée, en adaptant le titre, le résumé, le problème, la règle WCAG, la cause technique, la correction proposée et la recommandation à chaque cas spécifique.
+## Form Elements Sans Labels (Noeud 2)
 
+### Résumé
+
+Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d'écran ou ceux qui ont besoin de clarifications supplémentaires. Cela peut entraîner une confusion sur le but et la fonctionnalité des éléments, rendant l'interaction avec ces formulaires moins intuitive et plus frustrante.
+
+### Problème
+
+L'élément `<input type="range">` n'est pas associé à un label explicite ou implicite. Il manque également d'autres attributs comme `aria-label`, `title` ou `placeholder`.
+
+### Règle WCAG concernée
+
+1.3.1 – Info et Relations (Level A)
+
+### Cause technique
+
+L'élément de formulaire n'a pas été correctement structuré avec des labels explicites ou implicites, ni d'autres attributs comme `aria-label`, `title` ou `placeholder`. Cela peut être causé par une mauvaise structure du DOM ou un manque de compréhension sur l'importance des labels pour les éléments de formulaire.
+
+### Correction proposée
+
+Pour chaque élément de formulaire, ajoutez un label explicite. Par exemple :
+
+```html
+<label for="rangeInput">Valeur</label> <input type="range" id="rangeInput" />
+```
+
+Si le texte du label est déjà présent dans le contenu visible et qu'il ne peut pas être ajouté directement comme balise `<label>`, vous pouvez utiliser `aria-label` ou `aria-labelledby`.
+
+```html
+<input type="range" aria-label="Valeur" />
+```
+
+### Recommandation
+
+Assurez-vous que chaque élément de formulaire a un label explicite. Si le texte du label est déjà présent dans le contenu visible, utilisez `aria-label`. Cette pratique garantit une meilleure expérience utilisateur pour tous les utilisateurs, y compris ceux qui dépendent des lecteurs d'écran.
+
+---
+
+## Form Elements Sans Labels (Noeud 3)
+
+### Résumé
+
+Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d'écran ou ceux qui ont besoin de clarifications supplémentaires. Cela peut entraîner une confusion sur le but et la fonctionnalité des éléments, rendant l'interaction avec ces formulaires moins intuitive et plus frustrante.
+
+### Problème
+
+L'élément `<input type="range">` n'est pas associé à un label explicite ou implicite. Il manque également d'autres attributs comme `aria-label`, `title` ou `placeholder`.
+
+### Règle WCAG concernée
+
+1.3.1 – Info et Relations (Level A)
+
+### Cause technique
+
+L'élément de formulaire n'a pas été correctement structuré avec des labels explicites ou implicites, ni d'autres attributs comme `aria-label`, `title` ou `placeholder`. Cela peut être causé par une mauvaise structure du DOM ou un manque de compréhension sur l'importance des labels pour les éléments de formulaire.
+
+### Correction proposée
+
+Pour chaque élément de formulaire, ajoutez un label explicite. Par exemple :
+
+```html
+<label for="rangeInput">Valeur</label> <input type="range" id="rangeInput" />
+```
+
+Si le texte du label est déjà présent dans le contenu visible et qu'il ne peut pas être ajouté directement comme balise `<label>`, vous pouvez utiliser `aria-label` ou `aria-labelledby`.
+
+```html
+<input type="range" aria-label="Valeur" />
+```
+
+### Recommandation
+
+Assurez-vous que chaque élément de formulaire a un label explicite. Si le texte du label est déjà présent dans le contenu visible, utilisez `aria-label`. Cette pratique garantit une meilleure expérience utilisateur pour tous les utilisateurs, y compris ceux qui dépendent des lecteurs d'écran.
+
+---
+
+## Form Elements Sans Labels (Noeud 4)
+
+### Résumé
+
+Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d'écran ou ceux qui ont besoin de clarifications supplémentaires. Cela peut entraîner une confusion sur le but et la fonctionnalité des éléments, rendant l'interaction avec ces formulaires moins intuitive et plus frustrante.
+
+### Problème
+
+L'élément `<input type="range">` n'est pas associé à un label explicite ou implicite. Il manque également d'autres attributs comme `aria-label`, `title` ou `placeholder`.
+
+### Règle WCAG concernée
+
+1.3.1 – Info et Relations (Level A)
+
+### Cause technique
+
+L'élément de formulaire n'a pas été correctement structuré avec des labels explicites ou implicites, ni d'autres attributs comme `aria-label`, `title` ou `placeholder`. Cela peut être causé par une mauvaise structure du DOM ou un manque de compréhension sur l'importance des labels pour les éléments de formulaire.
+
+### Correction proposée
+
+Pour chaque élément de formulaire, ajoutez un label explicite. Par exemple :
+
+```html
+<label for="rangeInput">Valeur</label> <input type="range" id="rangeInput" />
+```
+
+Si le texte du label est déjà présent dans le contenu visible et qu'il ne peut pas être ajouté directement comme balise `<label>`, vous pouvez utiliser `aria-label` ou `aria-labelledby`.
+
+```html
+<input type="range" aria-label="Valeur" />
+```
+
+### Recommandation
+
+Assurez-vous que chaque élément de formulaire a un label explicite. Si le texte du label est déjà présent dans le contenu visible, utilisez `aria-label`. Cette pratique garantit une meilleure expérience utilisateur pour tous les utilisateurs, y compris ceux qui dépendent des lecteurs d'écran.
+
+---
+
+## Form Elements Sans Labels (Noeud 5)
+
+### Résumé
+
+Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d'écran ou ceux qui ont besoin de clarifications supplémentaires. Cela peut entraîner une confusion sur le but et la fonctionnalité des éléments, rendant l'interaction avec ces formulaires moins intuitive et plus frustrante.
+
+### Problème
+
+L'élément `<input type="range">` n'est pas associé à un label explicite ou implicite. Il manque également d'autres attributs comme `aria-label`, `title` ou `placeholder`.
+
+### Règle WCAG concernée
+
+1.3.1 – Info et Relations (Level A)
+
+### Cause technique
+
+L'élément de formulaire n'a pas été correctement structuré avec des labels explicites ou implicites, ni d'autres attributs comme `aria-label`, `title` ou `placeholder`. Cela peut être causé par une mauvaise structure du DOM ou un manque de compréhension sur l'importance des labels pour les éléments de formulaire.
+
+### Correction proposée
+
+Pour chaque élément de formulaire, ajoutez un label explicite. Par exemple :
+
+```html
+<label for="rangeInput">Valeur</label> <input type="range" id="rangeInput" />
+```
+
+Si le texte du label est déjà présent dans le contenu visible et qu'il ne peut pas être ajouté directement comme balise `<label>`, vous pouvez utiliser `aria-label` ou `aria-labelledby`.
+
+```html
+<input type="range" aria-label="Valeur" />
+```
+
+### Recommandation
+
+Assurez-vous que chaque élément de formulaire a un label explicite. Si le texte du label est déjà présent dans le contenu visible, utilisez `aria-label`. Cette pratique garantit une meilleure expérience utilisateur pour tous les utilisateurs, y compris ceux qui dépendent des lecteurs d'écran.
+
+---
+
+## Form Elements Sans Labels (Noeud 6)
+
+### Résumé
+
+Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d'écran ou ceux qui ont besoin de clarifications supplémentaires. Cela peut entraîner une confusion sur le but et la fonctionnalité des éléments, rendant l'interaction avec ces formulaires moins intuitive et plus frustrante.
+
+### Problème
+
+L'élément `<input type="range">` n'est pas associé à un label explicite ou implicite. Il manque également d'autres attributs comme `aria-label`, `title` ou `placeholder`.
+
+### Règle WCAG concernée
+
+1.3.1 – Info et Relations (Level A)
+
+### Cause technique
+
+L'élément de formulaire n'a pas été correctement structuré avec des labels explicites ou implicites, ni d'autres attributs comme `aria-label`, `title` ou `placeholder`. Cela peut être causé par une mauvaise structure du DOM ou un manque de compréhension sur l'importance des labels pour les éléments de formulaire.
+
+### Correction proposée
+
+Pour chaque élément de formulaire, ajoutez un label explicite. Par exemple :
+
+```html
+<label for="rangeInput">Valeur</label> <input type="range" id="rangeInput" />
+```
+
+Si le texte du label est déjà présent dans le contenu visible et qu'il ne peut pas être ajouté directement comme balise `<label>`, vous pouvez utiliser `aria-label` ou `aria-labelledby`.
+
+```html
+<input type="range" aria-label="Valeur" />
+```
+
+### Recommandation
+
+Assurez-vous que chaque élément de formulaire a un label explicite. Si le texte du label est déjà présent dans le contenu visible, utilisez `aria-label`. Cette pratique garantit une meilleure expérience utilisateur pour tous les utilisateurs, y compris ceux qui dépendent des lecteurs d'écran.
+
+---
+
+## Form Elements Sans Labels (Noeud 7)
+
+### Résumé
+
+Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d'écran ou ceux qui ont besoin de clarifications supplémentaires. Cela peut entraîner une confusion sur le but et la fonctionnalité des éléments, rendant l'interaction avec ces formulaires moins intuitive et plus frustrante.
+
+### Problème
+
+L'élément `<input type="range">` n'est pas associé à un label explicite ou implicite. Il manque également d'autres attributs comme `aria-label`, `title` ou `placeholder`.
+
+### Règle WCAG concernée
+
+1.3.1 – Info et Relations (Level A)
+
+### Cause technique
+
+L'élément de formulaire n'a pas été correctement structuré avec des labels explicites ou implicites, ni d'autres attributs comme `aria-label`, `title` ou `placeholder`. Cela peut être causé par une mauvaise structure du DOM ou un manque de compréhension sur l'importance des labels pour les éléments de formulaire.
+
+### Correction proposée
+
+Pour chaque élément de formulaire, ajoutez un label explicite. Par exemple :
+
+```html
+<label for="rangeInput">Valeur</label> <input type="range" id="rangeInput" />
+```
+
+Si le texte du label est déjà présent dans le contenu visible et qu'il ne peut pas être ajouté directement comme balise `<label>`, vous pouvez utiliser `aria-label` ou `aria-labelledby`.
+
+```html
+<input type="range" aria-label="Valeur" />
+```
+
+### Recommandation
+
+Assurez-vous que chaque élément de formulaire a un label explicite. Si le texte du label est déjà présent dans le contenu visible, utilisez `aria-label`. Cette pratique garantit une meilleure expérience utilisateur pour tous les utilisateurs, y compris ceux qui dépendent des lecteurs d'écran.
+
+---
+
+## Form Elements Sans Labels (Noeud 8)
+
+### Résumé
+
+Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d'écran ou ceux qui ont besoin de clarifications supplémentaires. Cela peut entraîner une confusion sur le but et la fonctionnalité des éléments, rendant l'interaction avec ces formulaires moins intuitive et plus frustrante.
+
+### Problème
+
+L'élément `<input type="range">` n'est pas associé à un label explicite ou implicite. Il manque également d'autres attributs comme `aria-label`, `title` ou `placeholder`.
+
+### Règle WCAG concernée
+
+1.3.1 – Info et Relations (Level A)
+
+### Cause technique
+
+L'élément de formulaire n'a pas été correctement structuré avec des labels explicites ou implicites, ni d'autres attributs comme `aria-label`, `title` ou `placeholder`. Cela peut être causé par une mauvaise structure du DOM ou un manque de compréhension sur l'importance des labels pour les éléments de formulaire.
+
+### Correction proposée
+
+Pour chaque élément de formulaire, ajoutez un label explicite. Par exemple :
+
+```html
+<label for="rangeInput">Valeur</label> <input type="range" id="rangeInput" />
+```
+
+Si le texte du label est déjà présent dans le contenu visible et qu'il ne peut pas être ajouté directement comme balise `<label>`, vous pouvez utiliser `aria-label` ou `aria-labelledby`.
+
+```html
+<input type="range" aria-label="Valeur" />
+```
+
+### Recommandation
+
+Assurez-vous que chaque élément de formulaire a un label explicite. Si le texte du label est déjà présent dans le contenu visible, utilisez `aria-label`. Cette pratique garantit une meilleure expérience utilisateur pour tous les utilisateurs, y compris ceux qui dépendent des lecteurs d'écran.
+
+---
+
+## Form Elements Sans Labels (Noeud 9)
+
+### Résumé
+
+Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d'écran ou ceux qui ont besoin de clarifications supplémentaires. Cela peut entraîner une confusion sur le but et la fonctionnalité des éléments, rendant l'interaction avec ces formulaires moins intuitive et plus frustrante.
+
+### Problème
+
+L'élément `<input type="range">` n'est pas associé à un label explicite ou implicite. Il manque également d'autres attributs comme `aria-label`, `title` ou `placeholder`.
+
+### Règle WCAG concernée
+
+1.3.1 – Info et Relations (Level A)
+
+### Cause technique
+
+L'élément de formulaire n'a pas été correctement structuré avec des labels explicites ou implicites, ni d'autres attributs comme `aria-label`, `title` ou `placeholder`. Cela peut être causé par une mauvaise structure du DOM ou un manque de compréhension sur l'importance des labels pour les éléments de formulaire.
+
+### Correction proposée
+
+Pour chaque élément de formulaire, ajoutez un label explicite. Par exemple :
+
+```html
+<label for="rangeInput">Valeur</label> <input type="range" id="rangeInput" />
+```
+
+Si le texte du label est déjà présent dans le contenu visible et qu'il ne peut pas être ajouté directement comme balise `<label>`, vous pouvez utiliser `aria-label` ou `aria-labelledby`.
+
+```html
+<input type="range" aria-label="Valeur" />
+```
+
+### Recommandation
+
+Assurez-vous que chaque élément de formulaire a un label explicite. Si le texte du label est déjà présent dans le contenu visible, utilisez `aria-label`. Cette pratique garantit une meilleure expérience utilisateur pour tous les utilisateurs, y compris ceux qui dépendent des lecteurs d'écran.
+
+---
+
+## Form Elements Sans Labels (Noeud 10)
+
+### Résumé
+
+Les formes sans labels peuvent causer des difficultés pour les utilisateurs qui naviguent avec un lecteur d'écran ou ceux qui ont besoin de clarifications supplémentaires. Cela peut entraîner une confusion sur le but et la fonctionnalité des éléments, rendant l'interaction avec ces formulaires moins intuitive et plus frustrante.
+
+### Problème
+
+L'élément `<input type="range">` n'est pas associé à un label explicite ou implicite. Il manque également d'autres attributs comme `aria-label`, `title` ou `placeholder`.
+
+### Règle WCAG concernée
+
+1.3.1 – Info et Relations (Level A)
+
+### Cause technique
+
+L'élément de formulaire n'a pas été correctement structuré avec des labels explicites ou implicites, ni d'autres attributs comme `aria-label`, `title` ou `placeholder`. Cela peut être causé par une mauvaise structure du DOM ou un manque de compréhension sur l'importance des labels pour les éléments de formulaire.
+
+### Correction proposée
+
+Pour chaque élément de formulaire, ajoutez un label explicite. Par exemple :
+
+```html
+<label for="rangeInput">Valeur</label> <input type="range" id="rangeInput" />
+```
+
+Si le texte du label est déjà présent dans le contenu visible et qu'il ne peut pas être ajouté directement comme bal
+
+</div>
+
+<div class="violation-card impact-moderate">
 
 ## Titre manquant : La page ne contient pas d'en-tête de niveau 1
 
 ### Résumé
-La présence d'un en-tête de niveau 1 (h1) est essentielle pour les utilisateurs qui naviguent avec un lecteur d'écran. Sans cet élément, ces utilisateurs peuvent se sentir perdus et ne pas comprendre la structure globale de la page. De plus, cela peut rendre la navigation par le clavier moins intuitive et compliquée.
+
+La présence d'un en-tête de niveau 1 (H1) est essentielle pour les utilisateurs qui naviguent avec un lecteur d'écran, car elle leur permet de comprendre rapidement la structure et le contenu principal de la page. Sans cet élément, ces utilisateurs risquent de se perdre dans l'arborescence du site et de ne pas saisir immédiatement le sujet abordé.
 
 ### Problème
-La page analysée n'a pas d'en-tête de niveau 1 (h1). C'est un élément crucial pour structurer le contenu et aider les utilisateurs à comprendre où ils se trouvent sur une page web. 
+
+La page en question n'a aucun en-tête de niveau 1 (H1) qui sert de point d'entrée clair pour les utilisateurs. Cela peut entraîner une confusion pour ceux qui dépendent des lecteurs d'écran et qui cherchent à comprendre rapidement la structure du contenu.
 
 ### Règle WCAG concernée
-2.4.6 – Titres (Aria)
 
-Bien que la règle spécifique soit liée au niveau AA, l'absence d'un en-tête de niveau 1 est un problème majeur qui affecte directement la navigation et la compréhension du contenu pour les utilisateurs dépendant des technologies d’assistance.
+2.4.6 – Titres (Level AA)
 
 ### Cause technique
-Le DOM (Document Object Model) manque d'une balise `<h1>` qui sert à définir le titre principal de la page. Cette absence peut être due à une mauvaise structuration du code ou à un oubli lors de l'écriture des contenus.
+
+Le problème est lié au manque d'un élément `<h1>` dans le DOM de la page, ce qui empêche les lecteurs d'écran et autres technologies d'accessibilité d'avoir un point d'entrée clair pour comprendre la structure du contenu.
 
 ### Correction proposée
-Ajoutez un en-tête de niveau 1 (h1) au début de votre contenu, qui doit contenir le titre principal de la page. Voici un exemple :
+
+Pour résoudre cette violation, il suffit d'ajouter un en-tête de niveau 1 (H1) qui décrit le sujet principal de la page. Voici un exemple :
 
 ```html
-<h1>Titre Principal de la Page</h1>
+<h1>Titre principal de la page</h1>
 ```
 
+Il est important que ce titre soit unique et résume clairement l'objet principal du contenu.
+
 ### Recommandation
-Assurez-vous d'inclure systématiquement un en-tête de niveau 1 (h1) pour chaque nouvelle page que vous créez ou modifiez. Cela aidera à améliorer l'expérience utilisateur et la conformité avec les normes WCAG.
 
----
+Afin d'éviter une régression, assurez-vous que chaque nouvelle page contient un en-tête de niveau 1 (H1) qui décrit le sujet principal. Cela permettra aux utilisateurs ayant besoin d'un lecteur d'écran ou d'autres technologies d'accessibilité de naviguer plus facilement et efficacement sur votre site.
 
-Ce rapport est conçu pour être clair, concis et facilement applicable par un développeur ou un concepteur web. Il vise à résoudre le problème de manière efficace tout en promouvant une meilleure expérience utilisateur pour tous.
+</div>
 
+<div class="violation-card impact-moderate">
 
-## Contenu non inclus dans des balises landmark
+## Contenu non inclus dans des éléments landmark
 
 ### Résumé
-Le contenu n'est pas inclus dans des balises landmark (comme `<main>`, `<header>`, `<footer>`). Cela rend la navigation pour les utilisateurs qui utilisent un lecteur d'écran plus difficile, car ils ne peuvent pas facilement sauter entre les sections principales de la page.
+
+Le contenu n'est pas inclus dans des éléments landmark (comme `main`, `header`, `footer`), ce qui rend la navigation pour les utilisateurs avec un lecteur d'écran plus difficile. Ils ne peuvent pas facilement sauter à certaines sections importantes du document.
 
 ### Problème
-Le contenu n'est pas inclus dans des balises landmark. Les éléments tels que `app-text`, `app-anim-co`, et `app-legal-notices` ne sont pas entourés par des balises qui permettent une navigation structurée pour les utilisateurs de lecteurs d'écran.
+
+La structure de l'arborescence DOM n'inclut pas des éléments landmark, empêchant ainsi le lecteur d'écran d'aider les utilisateurs à naviguer efficacement dans la page.
 
 ### Règle WCAG concernée
-1.3.1 – Info et Relations (Level A).
+
+2.4.1 – Titres et en-têtes (A).
 
 ### Cause technique
-Le DOM n'est pas correctement structuré avec des balises landmark, ce qui empêche le lecteur d'écran de reconnaître les sections principales du contenu.
+
+Les éléments de contenu ne sont pas entourés par des éléments landmark tels que `main`, `header`, `footer` ou d'autres éléments spécifiques pour structurer la page.
 
 ### Correction proposée
-Ajoutez des balises landmark pour chaque section importante. Par exemple :
+
+Ajoutez des éléments landmark à votre structure HTML pour améliorer l'accessibilité. Par exemple, vous pouvez ajouter un élément `main` autour du contenu principal de la page :
 
 ```html
 <main>
-  <app-text></app-text>
+  <!-- Contenu principal ici -->
 </main>
 
-<article role="region">
-  <app-anim-co></app-anim-co>
-</article>
+<header>
+  <!-- En-tête de la page ici -->
+</header>
 
 <footer>
-  <app-legal-notices></app-legal-notices>
+  <!-- Pied de page ici -->
 </footer>
 ```
 
 ### Recommandation
-Utilisez des balises landmark appropriées pour chaque section du contenu. Cela permet aux utilisateurs de naviguer facilement entre les sections principales de la page.
+
+Incluez des éléments landmark dans votre structure HTML pour faciliter la navigation avec un lecteur d'écran. Utilisez les éléments appropriés comme `main`, `header`, `footer` et autres selon le besoin.
 
 ---
 
-## Images sans texte alternatif
+## Image décorative sans texte alternatif
 
 ### Résumé
-Les images n'ont pas d'attribut `alt`. Les utilisateurs qui utilisent un lecteur d'écran ne peuvent pas comprendre le contenu des images, ce qui peut entraîner une perte d'information importante pour l'utilisateur.
+
+Une image décorative n'a pas de texte alternatif, ce qui peut confondre les utilisateurs avec un lecteur d'écran. Ils entendent une description inutile ou manquante pour une image purement esthétique.
 
 ### Problème
-Certaines images manquent de texte alternatif (attribut `alt`). Par exemple :
 
-```html
-<img src="image.jpg" alt="">
-```
+L'image décorative ne possède pas l'attribut `alt` vide (`alt=""`) pour indiquer qu'elle n'a pas de sens contextuel et n'est pas nécessaire pour comprendre le contenu.
 
 ### Règle WCAG concernée
-1.1.1 – Non-text Content (Level A).
+
+1.1.1 – Non-text Content (A).
 
 ### Cause technique
-L'attribut `alt` est absent ou vide pour les images.
+
+L'image décorative manque d'un attribut `alt` vide, ce qui peut entraîner une lecture inappropriée par les lecteurs d'écran.
 
 ### Correction proposée
-Ajoutez un attribut `alt` descriptif à chaque image :
+
+Ajoutez un attribut `alt=""` à l'élément `<img>` pour indiquer qu'il s'agit d'une image décorative :
 
 ```html
-<img src="image.jpg" alt="Description de l'image">
+<img src="image-decorative.jpg" alt="" />
 ```
 
 ### Recommandation
-Assurez-vous que chaque image a un attribut `alt` qui décrit précisément son contenu.
 
----
-
-## Bouton sans label
-
-### Résumé
-Les boutons n'ont pas de texte ou d'étiquette. Les utilisateurs qui utilisent un lecteur d'écran ne peuvent pas comprendre la fonction du bouton, ce qui peut entraîner une confusion et une perte de navigation.
-
-### Problème
-Certains éléments de type bouton manquent de texte ou d'étiquette :
-
-```html
-<button class="stretched-link" target="_parent" aria-label="Voir l'offre"></button>
-```
-
-### Règle WCAG concernée
-2.4.4 – Link Purpose (In Context) (Level A).
-
-### Cause technique
-L'élément bouton n'a pas de texte visible ou d'étiquette claire.
-
-### Correction proposée
-Ajoutez un texte visible pour le bouton :
-
-```html
-<button class="stretched-link" target="_parent">Voir l'offre</button>
-```
-
-### Recommandation
-Assurez-vous que chaque bouton a un texte visible et descriptif qui indique sa fonction.
-
----
-
-## Titres manquants
-
-### Résumé
-Les sections importantes de la page n'ont pas de titres. Les utilisateurs qui utilisent un lecteur d'écran ne peuvent pas facilement identifier les sections principales, ce qui peut entraîner une confusion et une perte de navigation.
-
-### Problème
-Certaines sections manquent de titres :
-
-```html
-<div class="section">
-  <!-- Contenu -->
-</div>
-```
-
-### Règle WCAG concernée
-2.4.6 – Heading and Label Orientation (Level AA).
-
-### Cause technique
-Les éléments n'ont pas d'éléments `<h1>`, `<h2>` ou autres titres pour structurer le contenu.
-
-### Correction proposée
-Ajoutez des titres aux sections importantes :
-
-```html
-<div class="section">
-  <h2>Titre de la section</h2>
-  <!-- Contenu -->
-</div>
-```
-
-### Recommandation
-Utilisez les balises `<h1>` à `<h6>` pour structurer le contenu et rendre la navigation plus facile.
+Utilisez toujours `alt=""` pour les images décoratives afin de signaler aux lecteurs d'écran que l'image n'a pas de sens contextuel.
 
 ---
 
 ## Lien non descriptif
 
 ### Résumé
-Les liens ne sont pas suffisamment descriptifs. Les utilisateurs qui utilisent un lecteur d'écran peuvent avoir du mal à comprendre où les liens mènent, ce qui peut entraîner une confusion et une perte de navigation.
+
+Un lien ne contient pas un texte descriptif, ce qui rend difficile la navigation et la compréhension du contenu pour les utilisateurs avec un lecteur d'écran. Ils ne peuvent pas comprendre où le lien mène sans contexte supplémentaire.
 
 ### Problème
-Certains liens manquent de texte descriptif :
 
-```html
-<a href="lien.html" class="stretched-link">Voir l'offre</a>
-```
+Le lien n'a pas de texte descriptif ou utilise un texte générique comme "Cliquez ici" qui ne donne aucune indication sur la destination du lien.
 
 ### Règle WCAG concernée
-2.4.4 – Link Purpose (In Context) (Level A).
+
+2.4.4 – Liens (A).
 
 ### Cause technique
-Le lien n'a pas de texte descriptif.
+
+L'élément `<a>` manque d'un texte descriptif ou contient un texte générique non informatif.
 
 ### Correction proposée
-Ajoutez un texte descriptif pour le lien :
+
+Modifiez le texte du lien pour qu'il soit clair et descriptif :
 
 ```html
-<a href="lien.html" class="stretched-link">Voir l'offre</a>
+<a href="lien.html">Voir l'offre</a>
 ```
 
 ### Recommandation
-Assurez-vous que chaque lien a du texte clair et descriptif qui indique où il mène.
+
+Utilisez toujours un texte descriptif pour les liens afin de permettre aux utilisateurs d'identifier la destination du lien sans contexte supplémentaire.
 
 ---
 
-## Contenu non inclus dans des balises landmark (suite)
+## Titres manquants
 
 ### Résumé
-Le contenu n'est pas inclus dans des balises landmark. Cela rend la navigation pour les utilisateurs qui utilisent un lecteur d'écran plus difficile, car ils ne peuvent pas facilement sauter entre les sections principales de la page.
+
+Les titres sont absents ou mal structurés, ce qui rend difficile la navigation et l'organisation du contenu pour les utilisateurs avec un lecteur d'écran. Ils ne peuvent pas facilement comprendre la structure hiérarchique de la page.
 
 ### Problème
-Les éléments tels que `app-text`, `app-anim-co`, et `app-legal-notices` ne sont pas entourés par des balises qui permettent une navigation structurée pour les utilisateurs de lecteurs d'écran.
+
+La page manque de balises `<h1>`, `<h2>` ou autres titres structurants, ce qui entraîne une mauvaise organisation du contenu.
 
 ### Règle WCAG concernée
-1.3.1 – Info and Relationships (Level A).
+
+2.4.6 – Titres et en-têtes (AA).
 
 ### Cause technique
-Le DOM n'est pas correctement structuré avec des balises landmark, ce qui empêche le lecteur d'écran de reconnaître les sections principales du contenu.
+
+La page n'utilise pas correctement les balises de titre pour structurer le contenu.
 
 ### Correction proposée
-Ajoutez des balises landmark pour chaque section importante :
+
+Ajoutez des titres structurants à votre document HTML :
+
+```html
+<h1>Titre principal</h1>
+<h2>Sous-titre</h2>
+```
+
+### Recommandation
+
+Utilisez correctement les balises de titre pour organiser et hiérarchiser le contenu de la page.
+
+---
+
+## Contenu non accessible par clavier
+
+### Résumé
+
+Le contenu n'est pas entièrement accessible via un clavier, ce qui rend difficile l'utilisation pour les utilisateurs dépendant du clavier. Ils ne peuvent pas naviguer efficacement dans tous les éléments interactifs de la page.
+
+### Problème
+
+Certains éléments interagissants (comme des boutons ou des liens) ne sont pas accessibles via un clavier, ce qui peut entraîner une impossibilité d'interaction pour ces utilisateurs.
+
+### Règle WCAG concernée
+
+2.1.1 – Contenu accessible par clavier (A).
+
+### Cause technique
+
+Les éléments interagissants n'ont pas de focus visuel ou ne peuvent pas être activés via les touches du clavier.
+
+### Correction proposée
+
+Assurez-vous que tous les éléments interactifs sont accessibles et réactifs au clavier :
+
+```html
+<button tabindex="0">Bouton accessible</button> <a href="#" tabindex="0">Lien accessible</a>
+```
+
+### Recommandation
+
+Utilisez `tabindex` pour rendre tous les éléments interagissants accessibles via un clavier.
+
+---
+
+## Lien sans texte
+
+### Résumé
+
+Un lien ne contient pas de texte, ce qui rend difficile la navigation et l'identification du contenu pour les utilisateurs avec un lecteur d'écran. Ils ne peuvent pas comprendre où le lien mène sans contexte supplémentaire.
+
+### Problème
+
+Le lien n'a pas de texte descriptif ou utilise une image sans alt approprié, ce qui entraîne une lecture inappropriée par les lecteurs d'écran.
+
+### Règle WCAG concernée
+
+2.4.4 – Liens (A).
+
+### Cause technique
+
+L'élément `<a>` manque de texte descriptif ou contient un élément non textuel sans alt approprié.
+
+### Correction proposée
+
+Modifiez le lien pour qu'il contienne du texte descriptif :
+
+```html
+<a href="lien.html">Voir l'offre</a>
+```
+
+### Recommandation
+
+Utilisez toujours du texte descriptif pour les liens afin de permettre aux utilisateurs d'identifier la destination du lien sans contexte supplémentaire.
+
+---
+
+## Contenu non inclus dans un élément landmark
+
+### Résumé
+
+Le contenu n'est pas inclus dans un élément landmark, ce qui rend difficile la navigation et l'identification des sections importantes pour les utilisateurs avec un lecteur d'écran. Ils ne peuvent pas facilement sauter à certaines sections de la page.
+
+### Problème
+
+La structure de l'arborescence DOM n'inclut pas des éléments landmark, empêchant ainsi le lecteur d'écran d'aider les utilisateurs à naviguer efficacement dans la page.
+
+### Règle WCAG concernée
+
+2.4.1 – Titres et en-têtes (A).
+
+### Cause technique
+
+Les éléments de contenu ne sont pas entourés par des éléments landmark tels que `main`, `header`, `footer` ou d'autres éléments spécifiques pour structurer la page.
+
+### Correction proposée
+
+Ajoutez des éléments landmark à votre structure HTML pour améliorer l'accessibilité :
 
 ```html
 <main>
-  <app-text></app-text>
+  <!-- Contenu principal ici -->
 </main>
 
-<article role="region">
-  <app-anim-co></app-anim-co>
-</article>
+<header>
+  <!-- En-tête de la page ici -->
+</header>
 
 <footer>
-  <app-legal-notices></app-legal-notices>
+  <!-- Pied de page ici -->
 </footer>
 ```
 
 ### Recommandation
-Utilisez des balises landmark appropriées pour chaque section du contenu. Cela permet aux utilisateurs de naviguer facilement entre les sections principales de la page.
+
+Incluez des éléments landmark dans votre structure HTML pour faciliter la navigation avec un lecteur d'écran. Utilisez les éléments appropriés comme `main`, `header`, `footer` et autres selon le besoin.
 
 ---
 
-## Contenu non inclus dans des balises landmark (suite)
+## Contenu non inclus dans un élément landmark
 
 ### Résumé
-Le contenu n'est pas inclus dans des balises landmark. Cela rend la navigation pour les utilisateurs qui utilisent un lecteur d'écran plus difficile, car ils ne peuvent pas facilement sauter entre les sections principales de la page.
+
+Le contenu n'est pas inclus dans des éléments landmark, ce qui rend difficile la navigation pour les utilisateurs avec un lecteur d'écran. Ils ne peuvent pas facilement sauter à certaines sections importantes de la page.
 
 ### Problème
-Les éléments tels que `app-text`, `app-anim-co`, et `app-legal-notices` ne sont pas entourés par des balises qui permettent une navigation structurée pour les utilisateurs de lecteurs d'écran.
+
+La structure de l'arborescence DOM n'inclut pas des éléments landmark tels que `main`, `header`, `footer` ou d'autres éléments spécifiques pour structurer la page.
 
 ### Règle WCAG concernée
-1.3.1 – Info and Relationships (Level A).
+
+2.4.1 – Titres et en-têtes (A).
 
 ### Cause technique
-Le DOM n'est pas correctement structuré avec des balises landmark, ce qui empêche le lecteur d'écran de reconnaître les sections principales du contenu.
+
+Les éléments de contenu ne sont pas entourés par des éléments landmark, empêchant ainsi le lecteur d'écran d'aider les utilisateurs à naviguer efficacement dans la page.
 
 ### Correction proposée
-Ajoutez des balises landmark pour chaque section importante :
+
+Ajoutez des éléments landmark à votre structure HTML pour améliorer l'accessibilité :
 
 ```html
 <main>
-  <app-text></app-text>
+  <!-- Contenu principal ici -->
 </main>
 
-<article role="region">
-  <app-anim-co></app-anim-co>
-</article>
+<header>
+  <!-- En-tête de la page ici -->
+</header>
 
 <footer>
-  <app-legal-notices></app-legal-notices>
+  <!-- Pied de page ici -->
 </footer>
 ```
 
 ### Recommandation
-Utilisez des balises landmark appropriées pour chaque section du contenu. Cela permet aux utilisateurs de naviguer facilement entre les sections principales de la page.
+
+Incluez des éléments landmark dans votre structure HTML pour faciliter la navigation avec un lecteur d'écran. Utilisez les éléments appropriés comme `main`, `header`, `footer` et autres selon le besoin.
 
 ---
 
-## Contenu non inclus dans des balises landmark (suite)
+## Contenu non inclus dans un élément landmark
 
 ### Résumé
-Le contenu n'est pas inclus dans des balises landmark. Cela rend la navigation pour les utilisateurs qui utilisent un lecteur d'écran plus difficile, car ils ne peuvent pas facilement sauter entre les sections principales de la page.
+
+Le contenu n'est pas inclus dans des éléments landmark, ce qui rend difficile la navigation pour les utilisateurs avec un lecteur d'écran. Ils ne peuvent pas facilement sauter à certaines sections importantes de la page.
 
 ### Problème
-Les éléments tels que `app-text`, `app-anim-co`, et `app-legal-notices` ne sont pas entourés par des balises qui permettent une navigation structurée pour les utilisateurs de lecteurs d'écran.
+
+La structure de l'arborescence DOM n'inclut pas des éléments landmark tels que `main`, `header`, `footer` ou d'autres éléments spécifiques pour structurer la page.
 
 ### Règle WCAG concernée
-1.3.1 – Info and Relationships (Level A).
+
+2.4.1 – Titres et en-têtes (A).
 
 ### Cause technique
-Le DOM n'est pas correctement structuré avec des balises landmark, ce qui empêche le lecteur d'écran de reconnaître les sections principales du contenu.
+
+Les éléments de contenu ne sont pas entourés par des éléments landmark, empêchant ainsi le lecteur d'écran d'aider les utilisateurs à naviguer efficacement dans la page.
 
 ### Correction proposée
-Ajoutez des balises landmark pour chaque section importante :
+
+Ajoutez des éléments landmark à votre structure HTML pour améliorer l'accessibilité :
 
 ```html
 <main>
-  <app-text></app-text>
+  <!-- Contenu principal ici -->
 </main>
 
-<article role="region">
-  <app-anim-co></app-anim-co>
-</article>
+<header>
+  <!-- En-tête de la page ici -->
+</header>
 
 <footer>
-  <app-legal-notices></app-legal-notices>
+  <!-- Pied de page ici -->
 </footer>
 ```
 
 ### Recommandation
-Utilisez des balises landmark appropriées pour chaque section du contenu. Cela permet aux utilisateurs de naviguer facilement entre les sections principales de la page.
+
+Incluez des éléments landmark dans votre structure HTML pour faciliter la navigation avec un lecteur d'écran. Utilisez les éléments appropriés comme `main`, `header`, `footer` et autres selon le besoin.
 
 ---
 
-## Contenu non inclus dans des balises landmark (suite)
+## Contenu non inclus dans un élément landmark
 
 ### Résumé
-Le contenu n'est pas inclus dans des balises landmark. Cela rend la navigation pour les utilisateurs qui utilisent un lecteur d'écran plus difficile, car ils ne peuvent pas facilement sauter entre les sections principales de la page.
+
+Le contenu n'est pas inclus dans des éléments landmark, ce qui rend difficile la navigation pour les utilisateurs avec un lecteur d'écran. Ils ne peuvent pas facilement sauter à certaines sections importantes de la page.
 
 ### Problème
-Les éléments tels que `app-text`, `app-anim-co`, et `app-legal-notices` ne sont pas entourés par des balises qui permettent une navigation structurée pour les utilisateurs de lecteurs d'écran.
+
+La structure de l'arborescence DOM n'inclut pas des éléments landmark tels que `main`, `header`, `footer` ou d'autres éléments spécifiques pour structurer la page.
 
 ### Règle WCAG concernée
-1.3.1 – Info and Relationships (Level A).
+
+2.4.1 – Titres et en-têtes (A).
 
 ### Cause technique
-Le DOM n'est pas correctement structuré avec des balises landmark, ce qui empêche le lecteur d'écran de reconnaître les sections principales du contenu.
+
+Les éléments de contenu ne sont pas entourés par des éléments landmark, empêchant ainsi le lecteur d'écran d'aider les utilisateurs à naviguer efficacement dans la page.
 
 ### Correction proposée
-Ajoutez des balises landmark pour chaque section importante :
+
+Ajoutez des éléments landmark à votre structure HTML pour améliorer l'accessibilité :
 
 ```html
 <main>
-  <app-text></app-text>
+  <!-- Contenu principal ici -->
 </main>
 
-<article role="region">
-  <app-anim-co></app-anim-co>
-</article>
+<header>
+  <!-- En-tête de la page ici -->
+</header>
 
 <footer>
-  <app-legal-notices></app-legal-notices>
+  <!-- Pied de page ici -->
 </footer>
 ```
 
 ### Recommandation
-Utilisez des balises landmark appropriées pour chaque section du contenu. Cela permet aux utilisateurs de naviguer facilement entre les sections principales de la page.
+
+Incluez des éléments landmark dans votre structure HTML pour faciliter la navigation avec un lecteur d'écran. Utilisez les éléments appropriés comme `main`, `header`, `footer` et autres selon le besoin.
 
 ---
 
-## Contenu non inclus dans des balises landmark (suite)
+## Contenu non inclus dans un élément landmark
 
 ### Résumé
-Le contenu n'est pas inclus dans des balises landmark. Cela rend la navigation pour les utilisateurs qui utilisent un lecteur d'écran plus difficile, car ils ne peuvent pas facilement sauter entre les sections principales de la page.
+
+Le contenu n'est pas inclus dans des éléments landmark, ce qui rend difficile la navigation pour les utilisateurs avec un lecteur d'écran. Ils ne peuvent pas facilement sauter à certaines sections importantes de la page.
 
 ### Problème
-Les éléments tels que `app-text`, `app-anim-co`, et `app-legal-notices` ne sont pas entourés par des balises qui permettent une navigation structurée pour les utilisateurs de lecteurs d'écran.
+
+La structure de l'arborescence DOM n'inclut pas des éléments landmark tels que `main`, `header`, `footer` ou d'autres éléments spécifiques pour structurer la page.
 
 ### Règle WCAG concernée
-1.3.1 – Info and Relationships (Level A).
+
+2.4.1 – Titres et en-têtes (A).
 
 ### Cause technique
-Le DOM n'est pas correctement structuré avec des balises landmark, ce qui empêche le lecteur d'écran de reconnaître les sections principales du contenu.
+
+Les éléments de contenu ne sont pas entourés par des éléments landmark, empêchant ainsi le lecteur d'écran d'aider les utilisateurs à naviguer efficacement dans la page.
 
 ### Correction proposée
-Ajoutez des balises landmark pour chaque section importante :
+
+Ajoutez des éléments landmark à votre structure HTML pour améliorer l'accessibilité :
 
 ```html
 <main>
-  <app-text></app-text>
+  <!-- Contenu principal ici -->
 </main>
 
-<article role="region">
-  <app-anim-co></app-anim-co>
-</article>
+<header>
+  <!-- En-tête de la page ici -->
+</header>
 
 <footer>
-  <app-legal-notices></app-legal-notices>
+  <!-- Pied de page ici -->
 </footer>
 ```
 
 ### Recommandation
-Utilisez des balises landmark appropriées pour chaque section du contenu. Cela permet aux utilisateurs de naviguer facilement entre les sections principales de la page.
+
+Incluez des éléments landmark dans votre structure HTML pour faciliter la navigation avec un lecteur d'écran. Utilisez les éléments appropriés comme `main`, `header`, `footer` et autres selon le besoin.
 
 ---
 
-## Contenu non inclus dans des balises landmark (suite)
+## Contenu non inclus dans un élément landmark
 
 ### Résumé
-Le contenu n'est pas inclus dans des balises landmark. Cela rend la navigation pour les utilisateurs qui utilisent un lecteur d'écran plus difficile, car ils ne peuvent pas facilement sauter entre les sections principales de la page.
+
+Le contenu n'est pas inclus dans des éléments landmark, ce qui rend difficile la navigation pour les utilisateurs avec un lecteur d'écran. Ils ne peuvent pas facilement sauter à certaines sections importantes de la page.
 
 ### Problème
-Les éléments tels que `app-text`, `app-anim-co`, et `app-legal-notices` ne sont pas entourés par des balises qui permettent une navigation structurée pour les utilisateurs de lecteurs d'écran.
+
+La structure de l'arborescence DOM n'inclut pas des éléments landmark tels que `main`, `header`, `footer` ou d'autres éléments spécifiques pour structurer la page.
 
 ### Règle WCAG concernée
-1.3.1 – Info and Relationships (Level A).
+
+2.4.1 – Titres et en-têtes (A).
 
 ### Cause technique
-Le DOM n'est pas correctement structuré avec des balises landmark, ce qui empêche le lecteur d'écran de reconnaître les sections principales du contenu.
+
+Les éléments de contenu ne sont pas entourés par des éléments landmark, empêchant ainsi le lecteur d'écran d'aider les utilisateurs à naviguer efficacement dans la page.
 
 ### Correction proposée
-Ajoutez des balises landmark pour chaque section importante :
+
+Ajoutez des éléments landmark à votre structure HTML pour améliorer l'accessibilité :
 
 ```html
 <main>
-  <app-text></app-text>
+  <!-- Contenu principal ici -->
 </main>
 
-<article role="region">
-  <app-anim-co></app-anim-co>
-</article>
+<header>
+  <!-- En-tête de la page ici -->
+</header>
 
 <footer>
-  <app-legal-notices></app-legal-notices>
+  <!-- Pied de page ici -->
 </footer>
 ```
 
 ### Recommandation
-Utilisez des balises landmark appropriées pour chaque section du contenu. Cela permet aux utilisateurs de naviguer facilement entre les sections principales de la page.
+
+Incluez des éléments landmark dans votre structure HTML pour faciliter la navigation avec un lecteur d'écran. Utilisez les éléments appropriés comme `main`, `header`, `footer` et autres selon le besoin.
 
 ---
 
-## Contenu non inclus dans des balises landmark (suite)
+## Contenu non inclus dans un élément landmark
 
 ### Résumé
-Le contenu n'est pas inclus dans des balises landmark. Cela rend la navigation pour les utilisateurs qui utilisent un lecteur d'écran plus difficile, car ils ne peuvent pas facilement sauter entre les sections principales de la page.
+
+Le contenu n'est pas inclus dans des éléments landmark, ce qui rend difficile la navigation pour les utilisateurs avec un lecteur d'écran. Ils ne peuvent pas facilement sauter à certaines sections importantes de la page.
 
 ### Problème
-Les éléments tels que `app-text`, `app-anim-co`, et `app-legal-notices` ne sont pas entourés par des balises qui permettent une navigation structurée pour les utilisateurs de lecteurs d'écran.
+
+La structure de l'arborescence DOM n'inclut pas des éléments landmark tels que `main`, `header`, `footer` ou d'autres éléments spécifiques pour structurer la page.
 
 ### Règle WCAG concernée
-1.3.1 – Info and Relationships (Level A).
+
+2.4.1 – Titres et en-têtes (A).
 
 ### Cause technique
-Le DOM n'est pas correctement structuré avec des balises landmark, ce qui empêche le lecteur d'écran de reconnaître les sections principales du contenu.
+
+Les éléments de contenu ne sont pas entourés par des éléments landmark, empêchant ainsi le lecteur d'écran d'aider les utilisateurs à naviguer efficacement dans la page.
 
 ### Correction proposée
-Ajoutez des balises landmark pour chaque section importante :
+
+Ajoutez des éléments landmark à votre structure HTML pour améliorer l'accessibilité :
 
 ```html
 <main>
-  <app-text></app-text>
+  <!-- Contenu principal ici -->
 </main>
 
-<article role="region">
-  <app-anim-co></app-anim-co>
-</article>
+<header>
+  <!-- En-tête de la page ici -->
+</header>
 
 <footer>
-  <app-legal-notices></app-legal-notices>
+  <!-- Pied de page ici -->
 </footer>
 ```
 
 ### Recommandation
-Utilisez des balises landmark appropriées pour chaque section du contenu. Cela permet aux utilisateurs de naviguer facilement entre les sections principales de la page.
+
+Incluez des éléments landmark dans votre structure HTML pour faciliter la navigation avec un lecteur d'écran. Utilisez les éléments appropriés comme `main`, `header`, `footer` et autres selon le besoin.
 
 ---
 
-## Contenu non inclus dans des balises landmark (suite)
+## Contenu non inclus dans un élément landmark
 
 ### Résumé
-Le contenu n'est pas inclus dans des balises landmark. Cela rend la navigation pour les utilisateurs qui utilisent un lecteur d'écran plus difficile, car ils ne peuvent pas facilement sauter entre les sections principales de la page.
+
+Le contenu n'est pas inclus dans des éléments landmark, ce qui rend difficile la navigation pour les utilisateurs avec un lecteur d'écran. Ils ne peuvent pas facilement sauter à certaines sections importantes de la page.
 
 ### Problème
-Les éléments tels que `app-text`, `app-anim-co`, et `app-legal-notices` ne sont pas entourés par des balises qui permettent une navigation structurée pour les utilisateurs de lecteurs d'écran.
+
+La structure de l'arborescence DOM n'inclut pas des éléments landmark tels que `main`, `header`, `footer` ou d'autres éléments spécifiques pour structurer la page.
 
 ### Règle WCAG concernée
-1.3.1 – Info and Relationships (Level A).
+
+2.4.1 – Titres et en-têtes (A).
 
 ### Cause technique
-Le DOM n'est pas correctement structuré avec des balises landmark, ce qui empêche le lecteur d'écran de reconnaître les sections principales du contenu.
+
+Les éléments de contenu ne sont pas entourés par des éléments landmark, empêchant ainsi le lecteur d'écran d'aider les utilisateurs à naviguer efficacement dans la page.
 
 ### Correction proposée
-Ajoutez des balises landmark pour chaque section importante :
+
+Ajoutez des éléments landmark à votre structure HTML pour améliorer l'accessibilité :
 
 ```html
 <main>
-  <app-text></app-text>
+  <!-- Contenu principal ici -->
 </main>
 
-<article role="region">
-  <app-anim-co></app-anim-co>
-</article>
+<header>
+  <!-- En-tête de la page ici -->
+</header>
 
 <footer>
-  <app-legal-notices></app-legal-notices>
+  <!-- Pied de page ici -->
 </footer>
 ```
 
 ### Recommandation
-Utilisez des balises landmark appropriées pour chaque section du contenu. Cela permet aux utilisateurs de naviguer facilement entre les sections principales de la page.
+
+Incluez des éléments landmark dans votre structure HTML pour faciliter la navigation avec un lecteur d'écran. Utilisez les éléments appropriés comme `main`, `header`, `footer` et autres selon le besoin.
 
 ---
 
-## Contenu non inclus dans des balises landmark (suite)
+## Contenu non inclus dans un élément landmark
 
 ### Résumé
-Le contenu n'est pas inclus dans des balises landmark. Cela rend la navigation pour les utilisateurs qui utilisent un lecteur d'écran plus difficile, car ils ne peuvent pas facilement sauter entre les sections principales de la page.
+
+Le contenu n'est pas inclus dans des éléments landmark, ce qui rend difficile la navigation pour les utilisateurs avec un lecteur d'écran. Ils ne peuvent pas facilement sauter à certaines sections importantes de la page.
 
 ### Problème
-Les éléments tels que `app-text`, `app-anim-co`, et `app-legal-notices` ne sont pas entourés par des balises qui permettent une navigation structurée pour les utilisateurs de lecteurs d'écran.
+
+La structure de l'arborescence DOM n'inclut pas des éléments landmark tels que `main`, `header`, `footer` ou d'autres éléments spécifiques pour structurer la page.
 
 ### Règle WCAG concernée
-1.3.1 – Info and Relationships (Level A).
 
-### Cause technique
-Le DOM n'est pas correctement structuré avec des balises landmark, ce qui empêche le lecteur d'écran de reconnaître les sections principales du contenu.
+2.4.1 –
 
-### Correction proposée
-Ajoutez des balises landmark pour chaque section importante :
+</div>
 
-```html
-<main>
-  <app-text></app-text>
-</main>
-
-<article role="region">
-  <app-anim-co></app-anim-co>
-</article>
-
-<footer>
-  <app-legal-notices></app-legal-notices>
-</footer>
-```
-
-### Recommandation
-Utilisez des balises landmark appropriées pour chaque section du contenu. Cela permet aux utilisateurs de naviguer facilement entre les sections principales de la page.
-
----
-
-## Contenu non inclus dans des balises landmark (suite)
-
-### Résumé
-Le contenu n'est pas inclus dans des balises landmark. Cela rend la navigation pour les utilisateurs qui utilisent un lecteur d'écran plus difficile, car ils ne peuvent pas facilement sauter entre les sections principales de la page.
-
-### Problème
-Les éléments tels que `app-text`, `app-anim-co`, et `app-legal-notices` ne sont pas entourés par des balises qui permettent une navigation structurée pour les utilisateurs de lecteurs d'écran.
-
-### Règle WCAG concernée
-1.3.1
-
+<div class="violation-card impact-serious">
 
 ## Éléments scrolables non accessibles au clavier
 
 ### Résumé
-Les utilisateurs qui naviguent avec un clavier ou un lecteur d'écran peuvent rencontrer des difficultés pour accéder à du contenu scrolable, comme des conteneurs de liste ou des panneaux de chat. Cela peut entraîner une perte de navigation et rendre l'expérience utilisateur frustrante, voire impossible.
+
+Les utilisateurs qui naviguent avec un clavier ou un lecteur d'écran peuvent rencontrer des difficultés pour accéder aux éléments contenant du contenu scrolable. Cela peut entraîner une perte de navigation fluide et rendre l'expérience utilisateur moins accessible, voire impossible dans certains cas.
 
 ### Problème
-L’élément avec la classe `.sm\:flex-row` ne permet pas aux utilisateurs d'accéder à son contenu scrolable via le clavier. Il n'est pas focusable ni ne contient de contenu focusable, ce qui empêche les utilisateurs de naviguer et d'interagir avec le contenu scrolable.
+
+L'élément ciblé par cette violation est un élément avec la classe `.sm\:flex-row`, qui ne permet pas d'accéder à son contenu scrolable via le clavier. Cela signifie que les utilisateurs dépendant des entrées de type clavier sont incapables de naviguer et d'interagir correctement avec ce contenu.
 
 ### Règle WCAG concernée
-2.1.3 – Éléments Focusables (A)
+
+2.1.3 – Les éléments scrolables doivent être accessibles par le clavier (niveau A).
 
 ### Cause technique
-L’élément en question n'est pas configuré pour recevoir le focus via un clavier, ce qui est nécessaire pour les éléments contenant du contenu scrolable. Il manque des attributs ou une structure DOM appropriée pour rendre l'élément accessible.
+
+Le problème réside dans la structure du DOM qui ne permet pas à l'élément d'être focusable via un clavier. L'élément en question n'a pas de contenu focusable ou n'est pas lui-même focusable, ce qui empêche les utilisateurs de naviguer et d'interagir avec le contenu scrolable.
 
 ### Correction proposée
-Pour résoudre cette violation, il faut ajouter la propriété `tabindex="0"` à l’élément et s'assurer qu'il contient au moins un élément focusable (comme un bouton ou une liste) qui permettra aux utilisateurs de naviguer dans le contenu scrolable.
+
+Pour résoudre cette violation, il est nécessaire d'ajouter un élément focusable (par exemple, une div avec `tabindex="0"`) autour du contenu scrolable. Voici comment cela pourrait être implémenté :
 
 ```html
-<div class="sm\:flex-row" tabindex="0">
-  <div>
-    <!-- Contenu scrolable -->
-    <button>Scroll</button>
-  </div>
+<div class="sm:flex-row" tabindex="0">
+  <!-- Contenu scrolable ici -->
 </div>
 ```
 
 ### Recommandation
-Ajoutez `tabindex="0"` à tous les éléments contenant du contenu scrolable et assurez-vous qu'ils contiennent au moins un élément focusable pour permettre aux utilisateurs de naviguer dans le contenu via le clavier.
+
+Assurez-vous que tous les éléments contenant des données scrolables soient entourés d'un élément qui peut recevoir le focus du clavier. Cela garantit une meilleure accessibilité pour les utilisateurs dépendant de l'entrée par clavier ou lecteur d'écran.
+
+---
+
+Ce rapport est conçu pour vous aider à comprendre et à corriger rapidement cette violation, améliorant ainsi l'expérience utilisateur pour tous les visiteurs du site.
+
+</div>
